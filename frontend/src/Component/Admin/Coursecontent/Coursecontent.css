@@ -1,0 +1,22 @@
+.file-upload-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+  }
+  
+  .file-upload-container:hover {
+    background-color: #e2e6ea;
+  }
+  
+  .file-upload-container label {
+    margin-right: 10px;
+  }
+ .frmshadow{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgb(209, 180, 235);
+ }

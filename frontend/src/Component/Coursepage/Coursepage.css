@@ -1,0 +1,29 @@
+.bgofcourse{
+    background-color: #b983ff;
+}
+.headfont{
+    font-size: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+}
+.descard {
+    width: 200px; /* Adjust as needed */
+    height: 200px; /* Adjust as needed */
+    border-radius: 50%; /* Makes it circular */
+    background-color: #f4eeee; /* Background color */
+    color: rgb(53, 4, 61); /* Text color */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    list-style: none;
+    box-shadow: 0 0 20px rgba(55, 0, 55, 0.8);
+  }
+  
+  .descard li {
+    margin-bottom: 10px;
+  }
+ul li{
+    list-style-type: none;
+}

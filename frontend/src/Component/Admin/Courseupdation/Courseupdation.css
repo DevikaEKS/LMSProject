@@ -1,0 +1,43 @@
+/* Ensure the form takes full width of the container */
+form {
+    width: 100%;
+  }
+  
+  /* Flexbox container for label and input */
+  .form-group-inner {
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+    margin-bottom: 1rem; /* Gap between form groups */
+  }
+  
+  /* Ensure labels take minimum space and align inputs */
+  .form-group-inner label {
+    flex: 0 0 150px; /* Adjust width as needed */
+    margin-right: 1rem; /* Gap between label and input */
+    font-weight: bold;
+  }
+  
+  /* Ensure inputs take remaining space */
+  .form-group-inner input {
+    flex: 1;
+  }
+  
+  .frmbg{
+    background-image: url("https://i.pinimg.com/564x/ac/0f/b5/ac0fb52181d73c9989406b9b8042bb2a.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+  }
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .form-group-inner {
+      flex-direction: column; /* Stack label and input on small screens */
+      align-items: stretch; /* Stretch label and input to full width */
+    }
+  
+    .form-group-inner label {
+      margin-right: 0; /* Remove margin-right on small screens */
+      margin-bottom: 0.5rem; /* Add margin-bottom on small screens */
+    }
+  }
+  

@@ -1,0 +1,59 @@
+
+.adpart {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  *{
+    color: black;
+  }
+  /* .row {
+    flex: 1;
+    display: flex;
+  } */
+  
+  .sidebar {
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  .content-area {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .content-open {
+    margin-left: 250px; 
+  }
+  
+  .content-closed {
+    margin-left: 0;
+  }
+  
+  .sidebar-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: #f8f9fa;
+    z-index: 1;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+  }
+  
+  
+  
+
+
+
+
+  

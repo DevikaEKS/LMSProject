@@ -1,0 +1,32 @@
+
+
+.chart-container {
+    height: 400px;
+    width: 400px;
+    margin: auto; /* Center the chart horizontally */
+    display: flex; /* Ensure the chart container is flexible */
+    justify-content: center; /* Center chart horizontally */
+  }
+  
+  .chart-container canvas {
+    position: relative; /* Ensure canvas is positioned relative to container */
+  }
+  
+  .chart-container .chartjs-legend {
+    display: flex; /* Make the legend a flex container */
+    flex-direction: column; /* Arrange legend items vertically */
+    align-items: flex-start; /* Align items to the start of the container */
+    margin-left: 20px; /* Space between chart and legend */
+  }
+  
+
+  .barchartpart{
+    max-width: '600px';
+    max-height: '600px';
+  }
+  @media (max-width:568px){
+    .barchartpart{
+        width: '600px';
+        height: '600px';
+      }
+  }
