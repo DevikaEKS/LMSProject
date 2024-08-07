@@ -20,7 +20,7 @@ const CourseBanner = () => {
       <div className='row d-flex justify-content-evenly'>
         {courses.map(course => (
           <div className='col-4' key={course.title}>
-            <div className='card rounded-3'>
+            <div className='card rounded-3 bannercrd'>
               <img src={course.image} className='card-image-top m-2 rounded-3' alt={course.title} />
               <div className='card-body'>
                 <div className="card-text">

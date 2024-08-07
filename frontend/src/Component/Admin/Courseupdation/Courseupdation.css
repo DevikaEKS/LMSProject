@@ -1,4 +1,4 @@
-/* Ensure the form takes full width of the container */
+
 form {
     width: 100%;
   }
@@ -21,7 +21,11 @@ form {
   .form-group-inner input {
     flex: 1;
   }
-  
+  .frmbutton{
+    background-color: #841ECC;
+    color: white;
+    border: 0px;
+  }
   .frmbg{
     background-image: url("https://i.pinimg.com/564x/ac/0f/b5/ac0fb52181d73c9989406b9b8042bb2a.jpg");
     background-repeat: no-repeat;

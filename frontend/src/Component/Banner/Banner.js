@@ -29,7 +29,7 @@ function Banner() {
 <div className='col-sm-12 col-md-6 col-lg-6 mt-5'>
     <h1 className='mt-5'>It’s time to Build Your <span style={{color:'#841ECC'}}>Skills </span></h1>
     <div>
-      <h4 style={{color:'#841ECC'}}><FontAwesomeIcon icon={faBook} className='mx-1 ic'/>Learn Courses </h4>
+      <h4 style={{color:'#841ECC'}}><FontAwesomeIcon icon={faBook} className='ic mx-1'/>Learn Courses </h4>
       <p>Start learning courses based on your interest and build your skills practically</p>
       <h4 style={{color:'#841ECC'}}><FontAwesomeIcon icon={faClipboardList} className='mx-1 ic' />Attend Quiz</h4>
       <p>Attend quiz and test your skills</p>

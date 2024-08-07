@@ -61,7 +61,8 @@
   
   .ic {
     display: inline-block; /* Ensure the element can be rotated independently */
-    animation: rotateY 2s linear ; /* Apply the animation */
+    animation: rotateY 2s linear ;
+    color: #841ECC !important; 
   }
   .banner-image{
     height: 600px;

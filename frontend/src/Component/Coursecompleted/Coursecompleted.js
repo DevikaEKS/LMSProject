@@ -32,10 +32,8 @@ function Coursecompleted() {
                 </div>
             </div>
         </div>
-        <div className='col'>
-         <div className='card'>
-        <img src={certificate} alt='certificate'/>
-        </div>
+        <div className='col'> 
+        <img src={certificate} alt='certificate' className='cert'/>
         </div>
     </div>
 
@@ -61,10 +59,8 @@ function Coursecompleted() {
                 </div>
             </div>
         </div>
-        <div className='col'>
-            <div className='card'>
-        <img src={certificate} alt='certificate'/>
-        </div>
+        <div className='col'>   
+        <img src={certificate} alt='certificate' className='cert'/>
         </div>
     </div>
 
@@ -90,10 +86,8 @@ function Coursecompleted() {
                 </div>
             </div>
         </div>
-        <div className='col'>
-            <div className='card'>
-           <img src={certificate} alt='certificate'/>
-           </div>
+        <div className='col'> 
+           <img src={certificate} alt='certificate' className='cert'/>  
         </div>
     </div>
 </div>

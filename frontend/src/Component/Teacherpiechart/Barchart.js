@@ -67,8 +67,8 @@ const BarChart = () => {
   };
 
   return(
-    <div className='barchartpart'>
-<Bar data={data} options={options} style={{ maxWidth: '600px', maxHeight: '800px' }} />;
+    <div className='barchartpart mx-2'>
+<Bar data={data} options={options} style={{ maxWidth: '600px', maxHeight: '800px' }} />
 </div>
   ) 
 };

@@ -1,8 +1,8 @@
 import React from 'react';
-import "./Studentattendance.css";
+import "./Approved.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faDownload } from '@fortawesome/free-solid-svg-icons';
-function Studentattendance() {
+function Approvedattendance() {
   return (
     <div className='container-fluid'>
         <h3 className='txtteacher'>Welcome to Teacher Dashboard</h3>
@@ -15,7 +15,7 @@ function Studentattendance() {
             <option>BSC CT</option>
         </select>
         <select>
-            <option>Select the Status</option>
+            <option>Approved</option>
             <option value="Approved">Approved</option>
             <option value="Unapproved">Unapproved</option>
         </select>
@@ -38,8 +38,8 @@ function Studentattendance() {
                     <td>Dev</td>
                     <td>Bsc</td>
                     <td>Coimbatore</td>
-                    <td><input type="checkbox"/><label className='text-success'>Approved</label> 
-                    <input type="checkbox" className='ms-4'/><label className='text-danger'>Unapproved</label>
+                    <td>
+                    <input type="checkbox" className='ms-4 text-danger'/><label className='text-success'>Approved</label>
                     </td>
                 </tr>
                 <tr>
@@ -47,8 +47,8 @@ function Studentattendance() {
                     <td>Dev</td>
                     <td>Bsc</td>
                     <td>Coimbatore</td>
-                    <td><input type="checkbox" className='text-success'/><label className='text-success'>Approved</label>  
-                    <input type="checkbox" className='ms-4 text-danger'/><label className='text-danger'>Unapproved</label>
+                    <td>
+                    <input type="checkbox" className='ms-4 text-danger'/><label className='text-success'>Approved</label>
                     </td>
                 </tr>
             </tbody>
@@ -59,4 +59,4 @@ function Studentattendance() {
   )
 }
 
-export default Studentattendance
+export default Approvedattendance

@@ -39,10 +39,8 @@ function ActiveCourses() {
           <div className='d-flex'>
             <img src={reviewim} style={{ height: "50px" }} />
             <div className='mx-2'>
-              <h4 className='titletext'> <CountUp start={0} end={5000} enableScrollSpy className="fontsize"></CountUp>K+ People</h4>
-              <h1 className="text-primarycolor fontsize">
-               
-              </h1>
+              <h4 className='icntxt'><CountUp start={0} end={5000} enableScrollSpy className="fontsize"></CountUp>K+ People</h4>
+              <h1 className="text-primarycolor fontsize"></h1>
               <p>Get Benefits of Enrolling this Course.</p>
             </div>
           </div>
@@ -73,7 +71,7 @@ function ActiveCourses() {
           <div className='d-flex'>
             <img src={reviewim} style={{ height: "50px" }} />
             <div className='mx-2'>
-              <h4 className='titletext'><CountUp start={0} end={2000} enableScrollSpy className="fontsize"></CountUp>K+ People</h4>
+              <h4 className='icntxt'><CountUp start={0} end={2000} enableScrollSpy className="fontsize"></CountUp>K+ People</h4>
               <p>Get Benefits of Enrolling this Course.</p>
             </div>
           </div>

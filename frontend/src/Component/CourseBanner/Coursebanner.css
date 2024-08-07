@@ -1,6 +1,6 @@
 
 
-.card {
+.bannercrd {
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -19,23 +19,12 @@
   }
   
   .card-text {
-
     font-size: 16px;
   }
   
-  .card-progress {
-    width: 90%;
-    margin: 0 auto 10px auto;
-    background: #f3f3f3;
-    border-radius: 5px;
-    overflow: hidden;
-  }
   
-  .progress-bar {
-    height: 10px;
-    background: #4caf50;
-    transition: width 0.3s;
-  }
+  
+  
   .coursebgcolour{
     background-color: #BF75F4;
   }
@@ -45,7 +34,7 @@ text-align: left;
   }
   .coursebutton{
     border-radius: 10px;
-    background-color: #6b08b2;
+    background-color: #0D6DFE;
     color: white;
     border: 0px;
     padding: 10px;

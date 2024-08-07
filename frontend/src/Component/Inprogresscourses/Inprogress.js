@@ -4,6 +4,7 @@ import stud2 from "../../Asset/stud2.png";
 import stud3 from "../../Asset/lapcard.png";
 import reviewim from "../../Asset/review.png";
 import "./Inprogress.css";
+import { Link } from 'react-router-dom';
 // import Avatar from '@mui/material/Avatar';
 // import AvatarGroup from '@mui/material/AvatarGroup';
 
@@ -26,7 +27,7 @@ function Inprogress() {
                                 <div class="card-body">
                                     <h5 class="card-title titletext my-2">Learn UI/UX Design Fundamentals</h5>
                                     
-                                    <button className='orangebtn rounded-5 my-2'>Go to Course</button>
+                                 <Link to="/course"> <button className='orangebtn rounded-5 my-2'>Go to Course</button></Link>  
                                 </div>
                             </div>
                         </div>
