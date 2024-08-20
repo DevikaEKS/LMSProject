@@ -14,7 +14,7 @@ function Coursecompleted() {
 
   const handleDownloadClick = () => {
     setShowConfetti(true);
-    setTimeout(() => setShowConfetti(false), 1000); // Confetti duration
+    setTimeout(() => setShowConfetti(false), 10000); // Confetti duration
     // Add your download logic here
   };
 
@@ -86,7 +86,6 @@ function Coursecompleted() {
                   </div>
                   <p>Overall Progress</p>
                   <Link onClick={handleDownloadClick}>Click to Download the Certificate</Link>
-                  {/* <button className='rounded-2 my-2'>Click to Download the Certificate</button> */}
                 </div>
               </div>
             </div>

@@ -101,6 +101,15 @@ function Adminsidebar() {
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Home</motion.span>
           </Link>
         </li>
+
+        <li>
+          <Link to="/admindashboard/admincredential">
+            <FontAwesomeIcon icon={faUser} className='mx-1 text-light'/>
+            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>User Registration</motion.span>
+          </Link>
+        </li>
+
+
         <li>
           <Link to="/admindashboard/coursedetail">
             <FontAwesomeIcon icon={faFileLines} className='mx-1 text-light'/>
