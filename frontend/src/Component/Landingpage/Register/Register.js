@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import regim from "../../../Asset/graduatedgirl.png";
 import "./Register.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RegisterPage() {
+  const nav = useNavigate();
   const [formData, setFormData] = useState({
-    username: '',
-    phno: '',
-    email: '',
-    password: '',
-    password2: '',
+    username: "",
+    phno: "",
+    email: "",
+    password: "",
+    password2: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -46,22 +51,62 @@ function RegisterPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      // Submit the form
-      console.log("Form submitted successfully", formData);
+      const key = {
+        name: formData.username,
+        email: formData.email,
+        phone_no: formData.phno,
+        password: formData.password2,
+      };
+      axios
+        .post(`http://localhost:5000/auth/register`, key)
+        .then((res) => {
+          console.log(res);
+          if (res.data.message === "User registered successfully.") {
+            toast.success("Registration Success", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+            nav("/login");
+          } else if (res.data.message === "All fields are required.") {
+            toast.error("All fields are required.", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+          } else if (
+            res.data.message ===
+            "Email or Phone number already exists in User table."
+          ) {
+            toast.error("Email or Phone number already exists.", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+          } else if (
+            res.data.message === "Email already exists in Auth table."
+          ) {
+            toast.error("Email already exists in Auth table.", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+          } else if (res.data.message === "Error inserting into User table.") {
+            toast.error("Error inserting into User table.", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+          }
+        })
+        .catch((e) => {
+          console.log("catch error", e);
+          toast.error("Registration failed. Please try again.", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        });
     } else {
-      console.log("Form has errors");
+      toast.error("Form has errors. Please correct them.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
   };
 
   return (
-  
-      
     <div className="RegisterApp">
-   
-      <div className="register-card">                                                                                                                                                                                                                                                                                              
-        
+      <ToastContainer />
+      <div className="register-card">
         <div className="login-form">
-         
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="username">Name</label>
@@ -69,11 +114,15 @@ function RegisterPage() {
                 type="text"
                 id="username"
                 name="username"
-                placeholder='Enter your name'
+                placeholder="Enter your name"
                 value={formData.username}
                 onChange={handleChange}
               />
-              {errors.username && <div className="error-message text-danger">{errors.username}</div>}
+              {errors.username && (
+                <div className="error-message text-danger">
+                  {errors.username}
+                </div>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="phno">Mobile Number</label>
@@ -85,7 +134,9 @@ function RegisterPage() {
                 value={formData.phno}
                 onChange={handleChange}
               />
-              {errors.phno && <div className="error-message text-danger">{errors.phno}</div>}
+              {errors.phno && (
+                <div className="error-message text-danger">{errors.phno}</div>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="email">Email</label>
@@ -97,7 +148,9 @@ function RegisterPage() {
                 value={formData.email}
                 onChange={handleChange}
               />
-              {errors.email && <div className="error-message text-danger">{errors.email}</div>}
+              {errors.email && (
+                <div className="error-message text-danger">{errors.email}</div>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
@@ -109,7 +162,11 @@ function RegisterPage() {
                 value={formData.password}
                 onChange={handleChange}
               />
-              {errors.password && <div className="error-message text-danger">{errors.password}</div>}
+              {errors.password && (
+                <div className="error-message text-danger">
+                  {errors.password}
+                </div>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="password2">Retype Password</label>
@@ -121,21 +178,25 @@ function RegisterPage() {
                 value={formData.password2}
                 onChange={handleChange}
               />
-              {errors.password2 && <div className="error-message text-danger">{errors.password2}</div>}
+              {errors.password2 && (
+                <div className="error-message text-danger">
+                  {errors.password2}
+                </div>
+              )}
             </div>
             <div className="form-group button-container">
-              <button type="submit" className='rounded-3'>Register</button>
+              <button type="submit" className="rounded-3">
+                Register
+              </button>
             </div>
           </form>
         </div>
         <div className="login-image">
-          <img src={regim} alt='register' />
+          <img src={regim} alt="register" />
         </div>
       </div>
     </div>
-   
   );
 }
 
 export default RegisterPage;
- 
