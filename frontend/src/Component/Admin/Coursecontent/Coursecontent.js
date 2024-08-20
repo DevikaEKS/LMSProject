@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Coursecontent.css";
+import { Link } from 'react-router-dom';
 
 function Coursecontent() {
   return (
@@ -61,7 +62,9 @@ function Coursecontent() {
               <textarea id="courseDescription" className="form-control"></textarea>
             </div>
           </div>
-          <input type='submit' className='btn btn-danger'/>
+          <Link to="/instructordashboard/pages" className="submitbutton1 pt-2 px-2 rounded-3 btn btn-dark">
+       Next
+      </Link>
         </form>
       </div>
     </div>

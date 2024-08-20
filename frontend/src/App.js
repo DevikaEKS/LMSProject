@@ -35,6 +35,8 @@ import Sidebarinstructor from './Component/Instructor/Sidebarinstructor/Sidebari
 import Ongoingclass from './Component/Student/OngoingClass/Ongoingclass';
 import RichTextEditorql from './Component/RichTextEditor/RichTextEditor';
 import Quilltxt from './Component/Instructor/Quilltxt/Quilltxt';
+import Coursepages from './Component/Admin/Coursecontent/Coursepages';
+import AdminCredential from './Component/Admin/Admincredential/Admincredential';
 
 
 
@@ -70,6 +72,7 @@ function App() {
           <Route path='/admindashboard/*' element={<Admindashboard/>}>
           <Route path='coursedetail' element={<CourseDetail/>}/>
           <Route path='courseupdate' element={<Courseupdation/>}/>
+          <Route path='admincredential' element={<AdminCredential/>}/>
           </Route>
 
           <Route path='/instructordashboard/*' element={<Dashboardinstructor/>}>
@@ -78,9 +81,18 @@ function App() {
           <Route path='coursesubmodule' element={<Courseobjective/>}/>
           <Route path='coursemodule' element={<Modulepage/>}/>
           <Route path='quilltxt' element={<Quilltxt/>}/>
+          <Route path='pages' element={<Coursepages/>}/>
           </Route>
           
           <Route path='/instructorsidebar' element={<Sidebarinstructor/>}/>
+          
+     
+          <Route path='/teacherdashboard/*' element={<Dashboardinstructor/>}>
+
+       </Route>
+       
+       
+       
         </Routes>
       </BrowserRouter>
     </div>

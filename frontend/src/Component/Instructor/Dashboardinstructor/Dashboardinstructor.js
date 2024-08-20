@@ -16,7 +16,7 @@ const Dashboardinstructor = () => {
       <div className="dashboard-content">
     <Outlet />
       </div>
-      </div>
+      </div>hk
       </div>
     </div>
   );
