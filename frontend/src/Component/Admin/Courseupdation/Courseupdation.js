@@ -1,5 +1,5 @@
 import React from 'react';
-import './Courseupdation.css'; // Import your CSS file
+import './Courseupdation.css'; 
 
 function Courseupdation() {
   const handleSubmit = (event) => {
@@ -16,14 +16,13 @@ function Courseupdation() {
       alert('Course Image is required');
       return;
     }
-
-    // Add additional form submission logic here
     console.log('Form submitted successfully');
   };
 
   return (
-    <div className='frmbg p-5 h-100'>
-      <form className='bg-light p-5 rounded-5' onSubmit={handleSubmit}>
+    <div className='container-fluid p-0'>
+    <div className='frmbg p-3 h-100'>
+      <form className='bg-light p-3 rounded-2' onSubmit={handleSubmit}>
         <div className="form-group">
           <div className="form-group-inner">
             <label htmlFor="courseFullName">Course Full Name</label>
@@ -40,6 +39,7 @@ function Courseupdation() {
           <div className="form-group-inner">
             <label htmlFor="courseCategory">Course Category</label>
             <select id="courseCategory" name="courseCategory" className="form-control">
+              <option>Select the course</option>
               <option>AWS</option>
               <option>FullStack</option>
               <option>Angular</option>
@@ -50,9 +50,20 @@ function Courseupdation() {
         </div>
         <div className="form-group">
           <div className="form-group-inner">
-            <label htmlFor="courseVisibility">Course Visibility</label>
-            <select id="courseVisibility" name="courseVisibility" className="form-control">
-              <option>Students</option>
+            <label htmlFor="courseInstructor">Select the Course Instructor</label>
+            <select id="courseInstructor" name="courseInstructor" className="form-control">
+              <option>Select the Instructor</option>
+              <option>Mr.abc</option>
+              <option>All</option>
+            </select>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="form-group-inner">
+            <label htmlFor="courseTeacher">Select the Teacher</label>
+            <select id="courseTeacher" name="courseTeacher" className="form-control">
+              <option>Select the Teacher</option>
+              <option>Mr.abc</option>
               <option>All</option>
             </select>
           </div>
@@ -65,7 +76,7 @@ function Courseupdation() {
         </div>
         <div className="form-group">
           <div className="form-group-inner">
-            <label htmlFor="courseEndDate">Course End Date</label>
+            <label htmlFor="courseEndDate text-start">Course End Date</label>
             <input id="courseEndDate" name="courseEndDate" type='datetime-local' className="form-control" />
           </div>
         </div>
@@ -83,6 +94,7 @@ function Courseupdation() {
         </div>
         <input type='submit' className='frmbutton' />
       </form>
+    </div>
     </div>
   );
 }

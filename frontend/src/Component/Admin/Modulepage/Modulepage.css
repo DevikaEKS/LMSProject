@@ -6,3 +6,30 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: rgb(209, 180, 235);
 }
+
+.violettext{
+    color:  #841ECC;
+  }
+.brd{
+  border: 1px solid #841ECC;
+}
+.submodulebox{
+  background-color: #EDD7FC;
+}
+  
+.addbutton {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+  }
+
+.submitbutton1{
+    background-color: #841ECC;
+    color: #fff;
+    text-decoration: none;
+  }

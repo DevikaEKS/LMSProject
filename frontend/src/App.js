@@ -1,36 +1,42 @@
 import './App.css';
-import Banner from './Component/Banner/Banner';
-import Menubar from './Component/Menubar/Menubar';
-import Login from './Component/Login/Login';
-import RegisterPage from './Component/Register/Register';
+import Banner from './Component/Landingpage/Banner/Banner';
+import Menubar from './Component/Landingpage/Menubar/Menubar';
+import Login from './Component/Landingpage/Login/Login';
+import RegisterPage from './Component/Landingpage/Register/Register';
 import { Footer } from './Component/Footer/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Coursepage from './Component/Coursepage/Coursepage';
-import Coursedashboard from './Component/Coursedashboard/Coursedashboard';
-import CourseDetail from './Component/Coursedetail/Coursedetail';
-import Sidebarnew from './Component/Sidebar/Sidebar';
-import AdminPart from './Component/Admin/Adminpart/Adminpart';
+// import Coursepage from './Component/Coursepage/Coursepage';
+import CourseDetail from './Component/Admin/Coursedetail/Coursedetail';
+// import Sidebarnew from './Component/Sidebar/Sidebar';
+// import AdminPart from './Component/Admin/Adminpart/Adminpart';
 import CodeEditor from './Component/Admin/Codecompiler/Codecompiler';
-import Activecourses from './Component/ActiveCourses/Activecourses';
-import Inprogress from './Component/Inprogresscourses/Inprogress';
-import Coursecompleted from './Component/Coursecompleted/Coursecompleted';
-import Coursemenubar from './Component/Coursemenubar/Coursemenubar';
+import Activecourses from './Component/Student/ActiveCourses/Activecourses';
+import Inprogress from './Component/Student/Inprogresscourses/Inprogress';
+import Coursecompleted from './Component/Student/Coursecompleted/Coursecompleted';
+import Coursemenubar from './Component/Student/Coursemenubar/Coursemenubar';
 import Coursereading from './Component/Coursereading/Coursereading';
-import Contentmodule from './Component/Contentmodule/Contentmodule';
-import Loginpopup from './Component/Loginpopup/Loginpopup';
-import Staffpopup from './Component/Loginpopup/Staffpopup';
+import Contentmodule from './Component/Instructor/Contentmodule/Contentmodule';
+import Loginpopup from './Component/Landingpage/Loginpopup/Loginpopup';
+import Staffpopup from './Component/Landingpage/Loginpopup/Staffpopup';
 import Studentattendance from './Component/Teacher/Studentattendance';
-import Totalchart from './Component/Teacherpiechart/Totalchart';
+import Totalchart from './Component/Teacher/Teacherpiechart/Totalchart';
 import Unapprovedattendance from './Component/Teacher/Unapproved';
 import Approvedattendance from './Component/Teacher/Approved';
-import Attendancetime from './Component/Attendancetime/Attendancetime';
+import Attendancetime from './Component/Teacher/Attendancetime/Attendancetime';
 import Sidebarcomp from './Component/sidebarcomp/sidebarcomp';
 import DashboardLayout from './Component/DashboardLayout/DashboardLayout';
+import Admindashboard from './Component/Admin/Admindashboard/Admindashboard';
+import Courseupdation from './Component/Admin/Courseupdation/Courseupdation';
+import Coursecontent from './Component/Admin/Coursecontent/Coursecontent';
+import Courseobjective from './Component/Instructor/Courseobjective/Courseobjective';
+import Modulepage from './Component/Admin/Modulepage/Modulepage';
+import Dashboardinstructor from './Component/Instructor/Dashboardinstructor/Dashboardinstructor';
+import Sidebarinstructor from './Component/Instructor/Sidebarinstructor/Sidebarinstructor';
+import Ongoingclass from './Component/Student/OngoingClass/Ongoingclass';
+import RichTextEditorql from './Component/RichTextEditor/RichTextEditor';
+import Quilltxt from './Component/Instructor/Quilltxt/Quilltxt';
 
-// import DashboardLayout from './Component/DashboardLayout/DashboardLayout';
-// import Home from './Component/DashboardPages/Home';
-// import Profile from './Component/DashboardPages/Profile';
-// import Settings from './Component/DashboardPages/Settings';
+
 
 function App() {
   return (
@@ -41,20 +47,17 @@ function App() {
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/' element={[<Menubar />, <Banner />, <Footer />]} />
           <Route path='/coursebanner' element={[<Menubar />, <Banner />, <CourseDetail />, <Footer />]} />
-          <Route path='/coursepage' element={[<Menubar />, <Coursepage />]} />
+          {/* <Route path='/coursepage' element={[<Menubar />, <Coursepage />]} /> */}
           <Route path='/activecourse' element={[<Menubar />, <Coursemenubar />, <Activecourses />, <Footer />]} />
           <Route path='/progress' element={[<Menubar />, <Coursemenubar />, <Inprogress />, <Footer />]} />
-          <Route path='/coursedashboard' element={<Coursedashboard />} />
-          <Route path='/coursedetail' element={<CourseDetail />} />
-          <Route path='/sidebar' element={<Sidebarnew />} />
-          <Route path='/admin' element={<AdminPart />} />
           <Route path='/compiler' element={<CodeEditor />} />
           <Route path='/completed' element={[<Menubar />, <Coursemenubar />, <Coursecompleted />, <Footer />]} />
           <Route path='/coursepart' element={<Coursereading />} />
           <Route path='/course' element={<Contentmodule />} />
           <Route path='/log' element={<Loginpopup />} />
           <Route path='/stf' element={<Staffpopup />} />
-         
+          <Route path='/ongoing' element={[<Menubar />,<Coursemenubar />,<Ongoingclass/>]}/>
+         {/* <Route path='/rch' element={<RichTextEditorql/>}/> */}
           <Route path='/attendancetime' element={<Attendancetime />} />
           <Route path='/Studentprogress' element={[<Menubar />, <Totalchart />, <Footer />]} />
           <Route path='/sd' element={<Sidebarcomp />} />
@@ -63,6 +66,21 @@ function App() {
           <Route path='unapproved' element={<Unapprovedattendance />} />
           <Route path='approved' element={<Approvedattendance />} />
           </Route>
+
+          <Route path='/admindashboard/*' element={<Admindashboard/>}>
+          <Route path='coursedetail' element={<CourseDetail/>}/>
+          <Route path='courseupdate' element={<Courseupdation/>}/>
+          </Route>
+
+          <Route path='/instructordashboard/*' element={<Dashboardinstructor/>}>
+          <Route path='coursedetail' element={<CourseDetail/>}/>
+          <Route path='coursecontent' element={<Coursecontent/>}/>
+          <Route path='coursesubmodule' element={<Courseobjective/>}/>
+          <Route path='coursemodule' element={<Modulepage/>}/>
+          <Route path='quilltxt' element={<Quilltxt/>}/>
+          </Route>
+          
+          <Route path='/instructorsidebar' element={<Sidebarinstructor/>}/>
         </Routes>
       </BrowserRouter>
     </div>

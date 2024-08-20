@@ -1,10 +1,10 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Loginimg from "../../Asset/Group 270989702.png";
+import Loginimg from "../../../Asset/Group 270989702.png";
+import "./Login.css";
 
-import "./Demcomponent.css";
-
-function Demcomponent() {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
@@ -35,18 +35,21 @@ function Demcomponent() {
     }
 
     if (valid) {
-      navigate('/coursebanner');
+      if (username === 'admin123@gmail.com') {
+        navigate('/admin');
+      } else {
+        navigate('/coursebanner');
+      }
     }
+    
   };
 
   const handleRegisterClick = () => {
     navigate('/register');
   };
-    return (
-        <div className="wrapper">
-          <h2>Animation Example</h2>
-          <div className="box">
-          <div className="LoginApp">
+
+  return (
+    <div className="LoginApp">
       <div className="login-card">
         <div className="login-form">
           <h1 className='logintxt text-center'>Login</h1>
@@ -86,19 +89,7 @@ function Demcomponent() {
         </div>
       </div>
     </div>
-
-
-
-
-            {[...Array(10)].map((_, index) => (
-              <div key={index}>
-                
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-  
+  );
 }
 
-export default Demcomponent
+export default Login;

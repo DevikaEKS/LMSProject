@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import "./Coursecontent.css";
 
@@ -6,17 +5,23 @@ function Coursecontent() {
   return (
     <div className='container-fluid'>
       <div className=' h-100'>
-        <form className='p-3 rounded-5 frmshadow'>
+        <form className='p-3 rounded-4 frmshadow'>
           <div className="form-group">
             <div className="form-group-inner">
               <label htmlFor="courseFullName">Course Full Name</label>
-              <input id="courseFullName" type='text' className="form-control" />
+              <input id="courseFullName" type='text' className="form-control" required/>
             </div>
           </div>
           <div className="form-group">
             <div className="form-group-inner">
               <label htmlFor="courseModuleName">Course Module Name</label>
-              <input id="courseModuleName" type='text' className="form-control" />
+              <input id="courseModuleName" type='text' className="form-control" required/>
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="form-group-inner">
+              <label htmlFor="coursesubmoduleName">Course Submodule Name</label>
+              <input id="coursesubmoduleName" type='text' className="form-control" required/>
             </div>
           </div>
           <div className="form-group">
@@ -51,7 +56,7 @@ function Coursecontent() {
             </div>
           </div>
           <div className="form-group">
-            <div className="form-group-inner w-50">
+            <div className="form-group-inner">
               <label htmlFor="courseDescription">Course Description</label>
               <textarea id="courseDescription" className="form-control"></textarea>
             </div>

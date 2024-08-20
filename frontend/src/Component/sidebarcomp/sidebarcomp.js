@@ -35,19 +35,19 @@ function Sidebarcomp() {
       <ul>
         <li>
             <Link to={"/"}><FontAwesomeIcon icon={faHome} className='mx-1 text-light'/></Link>
-          <motion.span variants={linkVariants}>Home</motion.span>
+          <motion.span variants={linkVariants} to={"/"}>Home</motion.span>
         </li>
         <li>
          <Link to={"/dashboard/studattendance"}> <FontAwesomeIcon icon={faUser} className='mx-1 text-light' /></Link>
-        <motion.span variants={linkVariants}>Profile</motion.span>
+        <motion.span variants={linkVariants} to={"/dashboard/unapproved"}>Profile</motion.span>
         </li>
         <li>
        <Link to={"/dashboard/unapproved"}><FontAwesomeIcon icon={faCog} className='mx-1 text-light'/></Link>
-       <motion.span variants={linkVariants}>Settings</motion.span>
+       <motion.span variants={linkVariants} to={"/dashboard/unapproved"}>Settings</motion.span>
         </li>
         <li>
             <Link to="/dashboard/approved"> <FontAwesomeIcon icon={faCog} className='mx-1 text-light'/></Link>
-            <motion.span variants={linkVariants}>1</motion.span>
+            <motion.span variants={linkVariants} to={"/dashboard/unapproved"}>1</motion.span>
         </li>
       </ul>
     </motion.div>

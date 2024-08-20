@@ -1,0 +1,21 @@
+.addbutton {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+  }
+  .violettext{
+    color:  #841ECC;
+  }
+.brd{
+  border: 1px solid #841ECC;
+}
+.submodulebox{
+  background-color: #EDD7FC;
+}
+  
+  

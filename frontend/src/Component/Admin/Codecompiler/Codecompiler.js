@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Codecompiler.css'; // Ensure you have this CSS file for styling
+import './Codecompiler.css'; 
 
 function CodeEditor() {
   const [code, setCode] = useState('');
@@ -7,23 +7,18 @@ function CodeEditor() {
   const [error, setError] = useState('');
 
   const handleRunCode = () => {
-    // Store original console.log
     const originalConsoleLog = console.log;
-
-    // Create a new array to capture logs
     const logs = [];
     console.log = (...args) => {
       logs.push(args.join(' '));
     };
 
     try {
-      // Evaluate the code
       new Function(code)();
     } catch (err) {
       setError('Error: ' + err.message);
       setOutput('');
     } finally {
-      // Restore original console.log and set output
       console.log = originalConsoleLog;
       setOutput(logs.join('\n'));
     }
