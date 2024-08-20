@@ -37,6 +37,7 @@ import RichTextEditorql from './Component/RichTextEditor/RichTextEditor';
 import Quilltxt from './Component/Instructor/Quilltxt/Quilltxt';
 import Coursepages from './Component/Admin/Coursecontent/Coursepages';
 import AdminCredential from './Component/Admin/Admincredential/Admincredential';
+import Categorycreation from './Component/Admin/Categorycreation/Categorycreation';
 
 
 
@@ -73,6 +74,7 @@ function App() {
           <Route path='coursedetail' element={<CourseDetail/>}/>
           <Route path='courseupdate' element={<Courseupdation/>}/>
           <Route path='admincredential' element={<AdminCredential/>}/>
+          <Route path='category' element={<Categorycreation/>}/>
           </Route>
 
           <Route path='/instructordashboard/*' element={<Dashboardinstructor/>}>
@@ -86,7 +88,7 @@ function App() {
           
           <Route path='/instructorsidebar' element={<Sidebarinstructor/>}/>
           
-     
+
           <Route path='/teacherdashboard/*' element={<Dashboardinstructor/>}>
 
        </Route>

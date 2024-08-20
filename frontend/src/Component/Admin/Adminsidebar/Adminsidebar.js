@@ -65,8 +65,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import './Adminsidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faBars, faFile, faPowerOff, faFileLines } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faBars, faFile, faPowerOff, faFileLines, faLayerGroup} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+
 
 const sidebarVariants = {
   open: { width: '200px' },
@@ -109,6 +110,13 @@ function Adminsidebar() {
           </Link>
         </li>
 
+        
+        <li>
+          <Link to="/admindashboard/category">
+            <FontAwesomeIcon icon={faLayerGroup} className='mx-1 text-light'/>
+            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Add Category</motion.span>
+          </Link>
+        </li>
 
         <li>
           <Link to="/admindashboard/coursedetail">
