@@ -1,0 +1,13 @@
+.frmshadow{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgb(209, 180, 235) !important;
+}
+   .orangebtn{
+    background-color: rgb(224, 70, 10);
+    
+  }
+  .orangebtn:hover{
+    background-color: orange;
+    color: white;
+    transform: scale(1.1,1.1);
+  }

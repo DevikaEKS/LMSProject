@@ -217,7 +217,7 @@ function Contentmodule() {
   return (
     <div className='d-flex'>
       <div className='col-2 bg-info vh-100'>
-        <div></div>
+     
         <div className="dropdown mt-3">
           <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             Chapter 1

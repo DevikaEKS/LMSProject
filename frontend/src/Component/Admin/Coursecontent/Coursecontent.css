@@ -16,7 +16,18 @@
   .file-upload-container label {
     margin-right: 10px;
   }
- .frmshadow{
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: rgb(209, 180, 235);
- }
+
+
+ .image-preview {
+  margin-top: 20px;
+}
+
+.img-preview {
+  max-width: 300px; /* Set the desired width */
+  max-height: 200px; /* Set the desired height */
+  object-fit: cover; /* Ensure the image covers the area */
+}
+.bgpurplecard{
+  background-color: rgb(209, 180, 235) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}

@@ -61,8 +61,8 @@ function Mcq() {
   };
 
   return (
-    <div className="container">
-      <div className='row'>
+    <div className="containe mx-5">
+      <div className='row '>
         <div className='col'>
           <form onSubmit={handleSubmit}>
             <div className="form-group">

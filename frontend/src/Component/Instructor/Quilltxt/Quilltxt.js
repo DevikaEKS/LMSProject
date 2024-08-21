@@ -335,7 +335,7 @@
 
 import React, { useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Import Quill styles
+import 'react-quill/dist/quill.snow.css'; 
 import axios from 'axios';
 import "./Quilltxt.css";
 import * as XLSX from 'xlsx';
@@ -391,14 +391,12 @@ const RichTextEditor = ({ editorContent, handleEditorChange, quillRef }) => {
         onChange={handleEditorChange}
         modules={RichTextEditor.modules}
         formats={RichTextEditor.formats}
-        placeholder="Start typing here..."
-      />
+        placeholder="Start typing here..."/>
       <input
         type="file"
         accept="image/*"
         onChange={handleImageUpload}
-        style={{ display: 'none' }}
-      />
+        style={{ display: 'none' }}/>
     </div>
   );
 };
@@ -446,8 +444,7 @@ const Quilltxt = () => {
     const question = {
       question: newQuestion,
       options: options,
-      correctOption: correctOption,
-    };
+      correctOption: correctOption,};
     console.log(question);
     setQuestions([...questions, question]);
     setNewQuestion('');
@@ -482,7 +479,7 @@ const Quilltxt = () => {
   return (
     <div className="container">
       <div className='row'>
-        <div className='col'>
+     
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Question</label>
@@ -528,15 +525,15 @@ const Quilltxt = () => {
             </ul>
           </div>
         </div>
-        <div className='col'>
+        {/* <div className='col'>
           <h6>Choose File from your Device</h6>
           <div className='uploadim mt-2 p-4'>
             <img src={uploadim} style={{height:'90px'}} className='impart'/>
             <p>Upload the file</p>
             <input type='file' className='d-block mt-2' accept='.xls, .xlsx' onChange={handleFileUpload} />
           </div>
-        </div>
-      </div>
+        </div> */}
+   
     </div>
   );
 }

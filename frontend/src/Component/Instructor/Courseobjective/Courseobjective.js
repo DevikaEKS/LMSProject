@@ -156,8 +156,8 @@ function Courseobjective() {
 
   return (
     <div className='container-fluid'>
-      <h3 className='violettext'>Welcome to Course Submodule</h3>
-      <div className='row'>
+      <h3 className='violettext '>Welcome to Course Submodule</h3>
+      <div className='row mx-5'>
         <form onSubmit={handleSubmit}>
           <div className='col-12'>
             <h5 className='mt-4 violettext'>Select Module</h5>
