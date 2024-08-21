@@ -1,9 +1,11 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import db from "./config/db.config.js";
+import db from "./config/email.config.mjs";
 import dotenv from "dotenv";
 import authRoute from "./routes/auth.routes.mjs";
+import categoryRoute from "./routes/Course/category.routes.mjs";
+import courseRoute from './routes/Course/course.routes.mjs'
 
 dotenv.config();
 const app = express();
@@ -18,6 +20,8 @@ app.use(
   })
 );
 app.use("/auth", authRoute);
+app.use("/category", categoryRoute);
+app.use('/course',courseRoute);
 app.use("/uploads", express.static("uploads"));
 //richtext
 

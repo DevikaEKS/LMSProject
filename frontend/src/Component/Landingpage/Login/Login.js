@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Loginimg from "../../../Asset/Group 270989702.png";
 import "./Login.css";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -41,11 +43,11 @@ function Login() {
         .then((res) => {
           console.log(res);
           if (res.data.message === "Invalid email or password raw data") {
-            alert("Invalid email or password");
+            toast.error("Invalid email or password");
           } else if (res.data.message === "Invalid email or password") {
-            alert("Invalid email or password");
+            toast.error("Invalid email or password");
           } else if (res.data.message === "login success") {
-            alert("login success");
+            toast.success("login success");
             navigate("/coursebanner");
           }
         })
@@ -61,6 +63,7 @@ function Login() {
 
   return (
     <div className="LoginApp">
+      <ToastContainer />
       <div className="login-card">
         <div className="login-form">
           <h1 className="logintxt text-center">Login</h1>

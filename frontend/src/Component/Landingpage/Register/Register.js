@@ -3,7 +3,7 @@ import regim from "../../../Asset/graduatedgirl.png";
 import "./Register.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function RegisterPage() {
@@ -60,45 +60,29 @@ function RegisterPage() {
       axios
         .post(`http://localhost:5000/auth/register`, key)
         .then((res) => {
-          console.log(res);
           if (res.data.message === "User registered successfully.") {
-            toast.success("Registration Success", {
-              position: toast.POSITION.TOP_RIGHT,
-            });
-            nav("/login");
+            toast.success("Registration Success");
+            // nav("/login");
           } else if (res.data.message === "All fields are required.") {
-            toast.error("All fields are required.", {
-              position: toast.POSITION.TOP_RIGHT,
-            });
+            toast.error("All fields are required.");
           } else if (
             res.data.message ===
             "Email or Phone number already exists in User table."
           ) {
-            toast.error("Email or Phone number already exists.", {
-              position: toast.POSITION.TOP_RIGHT,
-            });
+            toast.error("Email or Phone number already exists in User table.");
           } else if (
             res.data.message === "Email already exists in Auth table."
           ) {
-            toast.error("Email already exists in Auth table.", {
-              position: toast.POSITION.TOP_RIGHT,
-            });
+            toast.error("Email already exists in Auth table.");
           } else if (res.data.message === "Error inserting into User table.") {
-            toast.error("Error inserting into User table.", {
-              position: toast.POSITION.TOP_RIGHT,
-            });
+            toast.error("Error inserting into User table.");
           }
         })
         .catch((e) => {
-          console.log("catch error", e);
-          toast.error("Registration failed. Please try again.", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
+          toast.error("An error occurred. Please try again.");
         });
     } else {
-      toast.error("Form has errors. Please correct them.", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      console.log("Form has errors");
     }
   };
 
