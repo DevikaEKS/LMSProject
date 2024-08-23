@@ -60,12 +60,13 @@ function Courseupdation() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const courseFullName = event.target.courseFullName.value;
-    const courseShortName = event.target.courseShortName.value;
-    const courseStartDate = event.target.courseStartDate.value;
-    const courseEndDate = event.target.courseEndDate.value;
-    const courseImage = event.target.courseImage.files[0];
-    const courseDescription = event.target.courseDescription.value;
+    const form = event.target;
+    const courseFullName = form.courseFullName.value;
+    const courseShortName = form.courseShortName.value;
+    const courseStartDate = form.courseStartDate.value;
+    const courseEndDate = form.courseEndDate.value;
+    const courseImage = form.courseImage.files[0];
+    const courseDescription = form.courseDescription.value;
 
     // Validate required fields
     if (
@@ -83,8 +84,7 @@ function Courseupdation() {
     // Get the selected category IDs
     const selectedCategories = dropdowns
       .map((dropdown) => {
-        const selectedCategory =
-          event.target[`courseCategory-${dropdown.id}`].value;
+        const selectedCategory = form[`courseCategory-${dropdown.id}`].value;
         return selectedCategory ? parseInt(selectedCategory, 10) : null;
       })
       .filter((id) => id !== null); // Remove any null values
@@ -97,28 +97,32 @@ function Courseupdation() {
     formData.append("courseEndDate", courseEndDate);
     formData.append("courseImage", courseImage); // Assuming you will handle the image upload in the backend
     formData.append("courseDescription", courseDescription);
-    formData.append("selectedCategories", selectedCategories); // JSON.stringify for array of IDs
+    formData.append("selectedCategories", JSON.stringify(selectedCategories)); // JSON.stringify for array of IDs
 
-    console.log(formData);
     try {
       // Send the form data to the backend API
-      axios
-        .post("http://localhost:5000/course/addcourse", formData, {
+      const response = await axios.post(
+        "http://localhost:5000/course/addcourse",
+        formData,
+        {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        })
-        .then((response) => {
-          console.log(response);
+        }
+      );
 
-          if (response.data.message === "Course added successfully") {
-            toast.success("Course added successfully");
-          } else {
-            toast.error("Failed to add course");
-          }
+      if (response.data.message === "Course added successfully") {
+        toast.success("Course added successfully");
 
-          // console.log("Form submitted successfully:", response.data);
-        });
+        // Reset form fields
+        form.reset();
+        setCategories([]);
+        setDropdowns([{ id: 0, options: [] }]);
+        setNewCategory("");
+        setSelectedDropdownIndex(null);
+      } else {
+        toast.error("Failed to add course");
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("An error occurred while submitting the form");
