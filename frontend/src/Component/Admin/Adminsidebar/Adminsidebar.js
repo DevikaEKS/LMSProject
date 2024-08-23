@@ -68,7 +68,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser, faBars, faFile, faPowerOff, faFileLines, faLayerGroup} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-
 const sidebarVariants = {
   open: { width: '200px' },
   closed: { width: '50px' },
@@ -99,7 +98,7 @@ function Adminsidebar() {
         <li>
           <Link to="/">
             <FontAwesomeIcon icon={faHome} className='mx-1 text-light'/>
-            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Home</motion.span>
+            <motion.span variants={linkVariants} className='text-white text-decoration-none '>Home</motion.span>
           </Link>
         </li>
 

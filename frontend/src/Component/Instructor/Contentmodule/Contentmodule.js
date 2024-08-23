@@ -215,7 +215,7 @@ function Contentmodule() {
   };
 
   return (
-    <div className='d-flex'>
+    <div className='container-fluid'>
       <div className='col-2 bg-info vh-100'>
      
         <div className="dropdown mt-3">

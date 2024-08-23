@@ -33,33 +33,35 @@ function Sidebarinstructor() {
       </div>
       <ul>
         <li>
-            <Link to={"/instructordashboard/coursedetail"}><FontAwesomeIcon icon={faHome} className='mx-1 text-light'/></Link>
-          <motion.span variants={linkVariants}>Home</motion.span>
+            <Link to={"/instructordashboard/coursedetail"} className='d-flex'><FontAwesomeIcon icon={faHome} className='mx-1 text-light'/>
+          <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Home</motion.span>
+          </Link>
         </li>
         <li>
             <Link to="/instructordashboard/coursecontent"><FontAwesomeIcon icon={faFileUpload} className='mx-1 text-light'/></Link>
-            <motion.span variants={linkVariants}>Course Content</motion.span>
+            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Course Content</motion.span>
         </li>
         <li>
-            <Link to="/instructordashboard/coursemodule"> <FontAwesomeIcon icon={faFile} className='mx-1 text-light'/></Link>
-            <motion.span variants={linkVariants}>Module</motion.span>
+            <Link to="/instructordashboard/coursemodule" className='d-flex'> <FontAwesomeIcon icon={faFile} className='mx-1 text-light'/>
+            <motion.span variants={linkVariants} className=' ms-1'>Module</motion.span>
+            </Link>
         </li>
         <li>
             <Link to="/instructordashboard/coursesubmodule"> <FontAwesomeIcon icon={faFileLines} className='mx-1 text-light'/></Link>
-            <motion.span variants={linkVariants}>SubModule</motion.span>
+            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>SubModule</motion.span>
         </li>
         <li>
             <Link to="/instructordashboard/quilltxt"><FontAwesomeIcon icon={faLightbulb} className='mx-1 text-light'/></Link>
-            <motion.span variants={linkVariants}>Quiz</motion.span>
+            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Quiz</motion.span>
         </li>
         <li>
             <Link to="/instructordashboard/"><FontAwesomeIcon icon={faCode} className='mx-1 text-light'/></Link>
-            <motion.span variants={linkVariants}>Coading Exercise</motion.span>
+            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Coading Exercise</motion.span>
         </li>
         
         <li>
             <Link to="/"><FontAwesomeIcon icon={faPowerOff} className='mx-1 text-light'/></Link>
-            <motion.span variants={linkVariants}>Logout</motion.span>
+            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1' >Logout</motion.span>
         </li>
       </ul>
     </motion.div>
