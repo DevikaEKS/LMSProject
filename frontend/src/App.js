@@ -41,6 +41,8 @@ import Categorycreation from './Component/Admin/Categorycreation/Categorycreatio
 import CategoryDropdown from './Component/Instructor/Categorytree/CategoryDropdown';
 import EditorComponent from './Component/Instructor/Rcheditor/Rcheditor';
 import Question from './Component/Instructor/Question/Question';
+import Questionbank from './Component/Instructor/Questionbank/Questionbank';
+import CategoryQuizList from './Component/Instructor/Questionbank/CategoryQuizList';
 // import RichTextEditor from './Component/Instructor/Richtexteditor/Richtexteditor';
 
 
@@ -99,7 +101,7 @@ function App() {
        
        <Route path='/catg' element={<CategoryDropdown/>}/>
     <Route path='/editor' element={<EditorComponent/>}/>
-<Route path='/qs' element={<Question/>}/>
+<Route path='/qs' element={<CategoryQuizList/>}/>
         </Routes>
       </BrowserRouter>
     </div>
