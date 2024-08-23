@@ -38,7 +38,10 @@ import Quilltxt from './Component/Instructor/Quilltxt/Quilltxt';
 import Coursepages from './Component/Admin/Coursecontent/Coursepages';
 import AdminCredential from './Component/Admin/Admincredential/Admincredential';
 import Categorycreation from './Component/Admin/Categorycreation/Categorycreation';
-
+import CategoryDropdown from './Component/Instructor/Categorytree/CategoryDropdown';
+import EditorComponent from './Component/Instructor/Rcheditor/Rcheditor';
+import Question from './Component/Instructor/Question/Question';
+// import RichTextEditor from './Component/Instructor/Richtexteditor/Richtexteditor';
 
 
 function App() {
@@ -82,7 +85,7 @@ function App() {
           <Route path='coursecontent' element={<Coursecontent/>}/>
           <Route path='coursesubmodule' element={<Courseobjective/>}/>
           <Route path='coursemodule' element={<Modulepage/>}/>
-          <Route path='quilltxt' element={<Quilltxt/>}/>
+          <Route path='quilltxt' element={[<CategoryDropdown/>,<Question/>]}/>
           <Route path='pages' element={<Coursepages/>}/>
           </Route>
           
@@ -90,11 +93,13 @@ function App() {
           
 
           <Route path='/teacherdashboard/*' element={<Dashboardinstructor/>}>
+          
 
        </Route>
        
-       
-       
+       <Route path='/catg' element={<CategoryDropdown/>}/>
+    <Route path='/editor' element={<EditorComponent/>}/>
+<Route path='/qs' element={<Question/>}/>
         </Routes>
       </BrowserRouter>
     </div>

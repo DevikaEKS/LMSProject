@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./Categorycreation.css"
 
 function Categorycreation() {
   const [categories, setCategories] = useState(['AWS', 'FullStack', 'Angular', 'SQL', 'MongoDB']);
@@ -15,7 +16,8 @@ function Categorycreation() {
 
   return (
     <div className='container-fluid d-flex justify-content-center align-items-center vh-100'>
-      <div className='card p-4' style={{ width: '600px', height: '400px' }}>
+      <div className='card p-4 crdcolorforcard' style={{ width: '600px', height: '400px' }}>
+        <h4 className='text-center mb-5'>Course Category Creation</h4>
         <div className='d-flex align-items-center'>
           <select className='form-select'>
             <option value="">Select a category</option>
@@ -26,7 +28,7 @@ function Categorycreation() {
             ))}
           </select>
           <button
-            className='btn btn-primary ms-2'
+            className=' ms-2 plusbtn'
             onClick={() => setShowInput(!showInput)}
           >
             +
@@ -43,7 +45,7 @@ function Categorycreation() {
               className='form-control'
             />
             <button
-              className='btn btn-secondary mt-2'
+              className='btnaddcategory mt-2 rounded-2'
               onClick={handleAddCategory}
             >
               Add
