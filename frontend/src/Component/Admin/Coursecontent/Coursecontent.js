@@ -1,380 +1,186 @@
-// // import React, { useState } from 'react';
-// // import "./Coursecontent.css";
-// // import { Link } from 'react-router-dom';
-// // import ReactQuill from 'react-quill';
-// // import 'react-quill/dist/quill.snow.css';
+import React, { useState, useRef, useEffect } from "react";
+import {
+  Card,
+  CardBody,
+  Form,
+  Input,
+  Label,
+  Button,
+  Container,
+} from "reactstrap";
+import JoditEditor from "jodit-react";
+import axios from "axios";
+import "./Coursecontent.css";
+import { useNavigate } from "react-router-dom";
 
-// // function Coursecontent() {
-// //   const [description, setDescription] = useState('');
-// //   const [courseFullName, setCourseFullName] = useState('');
-// //   const [moduleName, setModuleName] = useState('');
-// //   const [submoduleName, setSubmoduleName] = useState('');
+const Coursecontent = () => {
+  const editor = useRef(null);
+  const [courses, setCourses] = useState([]);
+  const [modules, setModules] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(""); // ensure this is consistent with course.id type
+  const [selectedModule, setSelectedModule] = useState("");
+  const [description, setDescription] = useState("");
+  const [post, setPost] = useState({
+    title: "",
+    content: "",
+    categoryId: "",
+  });
+  const [selectedCourseDetails, setSelectedCourseDetails] = useState({
+    courseId: "",
+    course_category_id: "",
+  });
+  const [image, setImage] = useState(null);
+  const [availableFrom, setAvailableFrom] = useState("");
+  const [availableUntil, setAvailableUntil] = useState("");
+  const [completionCriteria, setCompletionCriteria] = useState("");
+  const [groupMode, setGroupMode] = useState("");
+  const navigate = useNavigate();
 
-// //   const handleDescriptionChange = (value) => {
-// //     setDescription(value);
-// //     console.log(value)
-// //   };
+  useEffect(() => {
+    axios.get(`http://localhost:5000/course/getcourse`).then((res) => {
+      setCourses(res.data.result);
+    });
 
-// //   function func(){
-// //     console.log(description)
-// //   }
-// //   return (
-// //     <div className='container-fluid'>
-// //       <div className='h-100'>
-// //         <form className='p-3 rounded-4 frmshadow'>
-// //           <div className="form-group">
-// //             <div className="form-group-inner">
-// //               <label htmlFor="courseFullName">Course Full Name</label>
-// //               <select
-// //                 id="courseFullName"
-// //                 className="form-control"
-// //                 value={courseFullName}
-// //                 onChange={(e) => setCourseFullName(e.target.value)}
-// //                 required>
-// //                 <option value="">Select Course</option>
-// //                 <option value="course1">Course 1</option>
-// //                 <option value="course2">Course 2</option>
-// //                 <option value="course3">Course 3</option>
-// //               </select>
-// //             </div>
-// //           </div>
-// //           <div className="form-group">
-// //             <div className="form-group-inner">
-// //               <label htmlFor="courseModuleName">Module Name</label>
-// //               <select
-// //                 id="courseModuleName"
-// //                 className="form-control"
-// //                 value={moduleName}
-// //                 onChange={(e) => setModuleName(e.target.value)}
-// //                 required>
-// //                 <option value="">Select Module</option>
-// //                 <option value="module1">Module 1</option>
-// //                 <option value="module2">Module 2</option>
-// //                 <option value="module3">Module 3</option>
-// //               </select>
-// //             </div>
-// //           </div>
-// //           <div className="form-group">
-// //             <div className="form-group-inner">
-// //               <label htmlFor="coursesubmoduleName">Submodule Name</label>
-// //               <select
-// //                 id="coursesubmoduleName"
-// //                 className="form-control"
-// //                 value={submoduleName}
-// //                 onChange={(e) => setSubmoduleName(e.target.value)}
-// //                 required >
-// //                 <option value="">Select Submodule</option>
-// //                 <option value="submodule1">Submodule 1</option>
-// //                 <option value="submodule2">Submodule 2</option>
-// //                 <option value="submodule3">Submodule 3</option>
-// //               </select>
-// //             </div>
-// //           </div>
+    axios.get(`http://localhost:5000/course/getmodule`).then((res) => {
+      setModules(res.data.result);
+    });
+  }, []);
 
-// //           <div className="form-group">
-// //             <div className="form-group-inner">
-// //               <label htmlFor="courseDescription">Description</label>
-// //               <textarea id="courseDescription" className="form-control"></textarea>
-// //             </div>
-// //           </div>
-
-// //           {/* Rich Text Editor for Course Content */}
-// //           <div className="form-group">
-// //             <div className="form-group-inner">
-// //               <label htmlFor="courseContent">Page Content</label>
-// //               <ReactQuill
-// //                 value={description}
-// //                 onChange={handleDescriptionChange}
-// //                 modules={{
-// //                   toolbar: [
-// //                     [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-// //                     [{ size: [] }],
-// //                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-// //                     [{'list': 'ordered'}, {'list': 'bullet'}, 
-// //                      {'indent': '-1'}, {'indent': '+1'}],
-// //                     ['link', 'image', 'video'],
-// //                     [{ 'color': [] }, { 'background': [] }],
-// //                     ['clean'] 
-// //                   ]
-// //                 }}
-// //                 formats={[
-// //                   'header', 'font', 'size',
-// //                   'bold', 'italic', 'underline', 'strike', 'blockquote',
-// //                   'list', 'bullet', 'indent',
-// //                   'link', 'image', 'video',
-// //                   'color', 'background',  
-// //                  'clean'
-// //                 ]}
-// //               />
-// //             </div>
-// //           </div>
-
-// //           <Link to="/instructordashboard/pages" className="submitbutton1 pt-2 px-2 rounded-3 btn btn-dark" onClick={func()}>
-// //             Next
-
-// //           </Link>
-// //         </form>
-// //       </div>
-// //     </div>
-// //   );
-// // }
-
-// // export default Coursecontent;
-
-
-
-
-// import React, { useState } from 'react';
-// import "./Coursecontent.css";
-// import { Link } from 'react-router-dom';
-// import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
-
-// function Coursecontent() {
-//   const [description, setDescription] = useState('');
-//   const [courseFullName, setCourseFullName] = useState('');
-//   const [moduleName, setModuleName] = useState('');
-//   const [submoduleName, setSubmoduleName] = useState('');
-
-//   const handleDescriptionChange = (value) => {
-//     setDescription(value);
-//     console.log(value);
-//   };
-
-//   function func() {
-//     console.log(description);
-//   }
-
-//   return (
-//     <div className='container-fluid'>
-//       <div className='h-100'>
-//         <form className='p-3 rounded-4 frmshadow'>
-//           <div className="form-group">
-//             <div className="form-group-inner">
-//               <label htmlFor="courseFullName">Course Full Name</label>
-//               <select
-//                 id="courseFullName"
-//                 className="form-control"
-//                 value={courseFullName}
-//                 onChange={(e) => setCourseFullName(e.target.value)}
-//                 required>
-//                 <option value="">Select Course</option>
-//                 <option value="course1">Course 1</option>
-//                 <option value="course2">Course 2</option>
-//                 <option value="course3">Course 3</option>
-//               </select>
-//             </div>
-//           </div>
-//           <div className="form-group">
-//             <div className="form-group-inner">
-//               <label htmlFor="courseModuleName">Module Name</label>
-//               <select
-//                 id="courseModuleName"
-//                 className="form-control"
-//                 value={moduleName}
-//                 onChange={(e) => setModuleName(e.target.value)}
-//                 required>
-//                 <option value="">Select Module</option>
-//                 <option value="module1">Module 1</option>
-//                 <option value="module2">Module 2</option>
-//                 <option value="module3">Module 3</option>
-//               </select>
-//             </div>
-//           </div>
-//           <div className="form-group">
-//             <div className="form-group-inner">
-//               <label htmlFor="coursesubmoduleName">Submodule Name</label>
-//               <select
-//                 id="coursesubmoduleName"
-//                 className="form-control"
-//                 value={submoduleName}
-//                 onChange={(e) => setSubmoduleName(e.target.value)}
-//                 required >
-//                 <option value="">Select Submodule</option>
-//                 <option value="submodule1">Submodule 1</option>
-//                 <option value="submodule2">Submodule 2</option>
-//                 <option value="submodule3">Submodule 3</option>
-//               </select>
-//             </div>
-//           </div>
-
-//           <div className="form-group">
-//             <div className="form-group-inner">
-//               <label htmlFor="courseDescription">Description</label>
-//               <textarea id="courseDescription" className="form-control"></textarea>
-//             </div>
-//           </div>
-
-//           {/* Rich Text Editor for Course Content */}
-//           <div className="form-group">
-//             <div className="form-group-inner">
-//               <label htmlFor="courseContent">Page Content</label>
-//               <ReactQuill
-//                 value={description}
-//                 onChange={handleDescriptionChange}
-//                 modules={{
-//                   toolbar: [
-//                     [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-//                     [{ size: [] }],
-//                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-//                     [{'list': 'ordered'}, {'list': 'bullet'}, 
-//                      {'indent': '-1'}, {'indent': '+1'}],
-//                     ['link', 'image', 'video'],
-//                     [{ 'color': [] }, { 'background': [] }],
-//                     ['clean'] 
-//                   ]
-//                 }}
-//                 formats={[
-//                   'header', 'font', 'size',
-//                   'bold', 'italic', 'underline', 'strike', 'blockquote',
-//                   'list', 'bullet', 'indent',
-//                   'link', 'image', 'video',
-//                   'color', 'background',  
-//                  'clean'
-//                 ]}
-//               />
-//             </div>
-//           </div>
-
-//           <Link 
-//             to="/instructordashboard/pages" 
-//             className="submitbutton1 pt-2 px-2 rounded-3 btn btn-dark" 
-//             onClick={func} // Remove parentheses here
-//           >
-//             Next
-//           </Link>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Coursecontent;
-
-
-
- import React, { useState, useRef, useEffect } from "react";
- import { Card, CardBody, Form, Input, Label, Button, Container } from "reactstrap";
- import JoditEditor from "jodit-react";
- import { Link } from 'react-router-dom';
- import "./Coursecontent.css"
-
-
- const Coursecontent = () => {
-   const editor = useRef(null);
-   const [courses, setCourses] = useState([]);
-   const [modules, setModules] = useState([]);
-   const [submodules, setSubModules] = useState([]);
-   const [selectedCourse, setSelectedCourse] = useState('');
-   const [selectedModule, setSelectedModule] = useState('');
-   const [selectedSubmodule, setSelectedSubmodule] = useState('');
-   const [description, setDescription] = useState('');
-   const [post, setPost] = useState({
-     title: '',
-     content: '',
-     categoryId: ''
-   });
-   const [image, setImage] = useState(null);
-
-   useEffect(() => {
-     setCourses([
-       { id: 1, name: 'Course 1' },
-       { id: 2, name: 'Course 2' },
-       { id: 3, name: 'Course 3' }
-     ]);
-     setModules([
-       { id: 1, name: 'Module 1' },
-       { id: 2, name: 'Module 2' },
-       { id: 3, name: 'Module 3' }
-     ]);
-     setSubModules([
-       { id: 1, name: 'Submodule 1' },
-       { id: 2, name: 'Submodule 2' },
-       { id: 3, name: 'Submodule 3' }
-     ]);
-   }, []);
-
-   const handleCourseChange = (e) => {
-     setSelectedCourse(e.target.value);
-      
-   };
+  const handleCourseChange = (e) => {
+    const selectedCourseId = e.target.value;
+    const selectedCourse = courses.find(
+      (course) => course.courseid.toString() === selectedCourseId
+    );
+    if (selectedCourse) {
+      setSelectedCourse(selectedCourseId);
+      setSelectedCourseDetails({
+        courseId: selectedCourse.courseid,
+        course_category_id: selectedCourse.course_category_id,
+      });
+    }
+  };
 
   const handleModuleChange = (e) => {
     setSelectedModule(e.target.value);
-   };
+  };
 
-  const handleSubModuleChange = (e) => {
-     setSelectedSubmodule(e.target.value);
-   };
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
 
-   const handleDescriptionChange = (e) => {
-     setDescription(e.target.value);
-   };
+  const handleFileChange = (event) => {
+    setImage(event.target.files[0]);
+  };
 
-   const handleFileChange = (event) => {
-     console.log(event.target.files[0]);
-     setImage(event.target.files[0]);
-   };
+  const handleEditorChange = (content) => {
+    setPost((prevPost) => ({
+      ...prevPost,
+      content,
+    }));
+  };
 
-   const handleEditorChange = (content) => {
-     setPost((prevPost) => ({
-       ...prevPost,
-       content
-     }));
-   };
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-   return (
-     <div className="container-fluid wrapper ">
-       <Card className="mx-5 shadow-sm border-0 mt-2 bgpurplecard">
-         <CardBody>
-           <h3>Page Content</h3>
-           <Form>
-             <div className="my-3">
-               <Label for="courseSelect">Course Name</Label>
-               <Input
-                 type="select"
-                 id="courseSelect"
-                 value={selectedCourse}
-                 onChange={handleCourseChange}
-                 className="rounded-0"
-               >
+    const formData = new FormData();
+    formData.append("courseId", selectedCourseDetails.courseId);
+    formData.append(
+      "course_category_id",
+      selectedCourseDetails.course_category_id
+    );
+    formData.append("moduleId", selectedModule);
+    formData.append("description", description);
+    formData.append("content", post.content);
+    formData.append("availableFrom", availableFrom);
+    formData.append("availableUntil", availableUntil);
+    formData.append("completionCriteria", completionCriteria);
+    formData.append("groupMode", groupMode);
+
+    if (image) {
+      formData.append("image", image);
+    }
+
+    axios
+      .post("http://localhost:5000/course/submitcon", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        // console.log("Data submitted successfully:", response.data);
+        if (response.data.message === "Content submitted successfully") {
+          alert("Content submitted successfully");
+          navigate("/instructordashboard/displaycontent", {
+            state: {
+              ...selectedCourseDetails,
+              moduleId: selectedModule,
+              description,
+              content: post.content,
+              availableFrom,
+              availableUntil,
+              completionCriteria,
+              groupMode,
+              image,
+            },
+          });
+        } else if (response.data.error === "Failed to insert activity data") {
+          alert("Failed to insert activity data");
+        } else if (response.data.error === "Failed to insert context data") {
+          alert("Failed to insert context data");
+        } else if (response.data.error === "Failed to insert page data") {
+          alert("Failed to insert page data");
+        }
+      })
+      .catch((error) => {
+        console.error("Backend returned an error:", error);
+        // Handle error
+      });
+  };
+
+  return (
+    <div className="container-fluid wrapper">
+      <Card className="mx-5 shadow-sm border-0 mt-2 bgpurplecard">
+        <CardBody>
+          <h3>Page Content</h3>
+          <Form onSubmit={handleSubmit}>
+            <div className="my-3">
+              <Label for="courseSelect">Course Name</Label>
+              <Input
+                type="select"
+                id="courseSelect"
+                value={selectedCourse}
+                onChange={handleCourseChange}
+                className="rounded-0"
+              >
                 <option value="">Select Course</option>
-                 {courses.map((course) => (
-                   <option key={course.id} value={course.id}>{course.name}</option>
-                 ))}
-               </Input>
-             </div>
+                {courses.map((course) => (
+                  <option
+                    key={course.courseid}
+                    value={course.courseid.toString()}
+                  >
+                    {course.coursename}
+                  </option>
+                ))}
+              </Input>
+            </div>
 
-             <div className="my-3">
-               <Label for="moduleSelect">Module Name</Label>
-               <Input
-                 type="select"
-                 id="moduleSelect"
-                 value={selectedModule}
-                 onChange={handleModuleChange}
-                 className="rounded-0" >
-                 <option value="">Select Module</option>
-                 {modules.map((module) => (
-                   <option key={module.id} value={module.id}>{module.name}</option>
-                 ))}
-               </Input>
-             </div>
-
-             <div className="my-3">
-               <Label for="submoduleSelect">Submodule Name</Label>
-               <Input
-                 type="select"
-                 id="submoduleSelect"
-                 value={selectedSubmodule}
-                 onChange={handleSubModuleChange}
-                 className="rounded-0"
-               >
-                 <option value="">Select Submodule</option>
-                 {submodules.map((submodule) => (
-                   <option key={submodule.id} value={submodule.id}>{submodule.name}</option>
-                 ))}
-               </Input>
-             </div>
+            <div className="my-3">
+              <Label for="moduleSelect">Module Name</Label>
+              <Input
+                type="select"
+                id="moduleSelect"
+                value={selectedModule}
+                onChange={handleModuleChange}
+                className="rounded-0"
+              >
+                <option value="">Select Module</option>
+                {modules.map((module) => (
+                  <option key={module.moduleid} value={module.moduleid}>
+                    {module.modulename}
+                  </option>
+                ))}
+              </Input>
+            </div>
 
             <div className="my-3">
               <Label for="courseDescription">Description</Label>
@@ -384,39 +190,114 @@
                 value={description}
                 onChange={handleDescriptionChange}
                 className="rounded-0"
-               />
+              />
             </div>
 
-             <div className="my-3">
-               <Label for="content">Post Content</Label>
-               <JoditEditor
-                 ref={editor}
-                 value={post.content}
-                 config={{
-                   uploader: {
-                     insertImageAsBase64URI: true,
-                     images: {
-                       url: handleFileChange,
-                     },
-                     files: {
-                       url: handleFileChange,
-                     },
-                   },
-                 }}
-                 onChange={handleEditorChange}/>
-             </div>
+            <div className="my-3">
+              <Label for="content">Post Content</Label>
+              <JoditEditor
+                ref={editor}
+                value={post.content}
+                config={{
+                  uploader: {
+                    insertImageAsBase64URI: true,
+                  },
+                }}
+                onChange={handleEditorChange}
+              />
+            </div>
 
-             <Container className="text-center"> 
-               <Button className="rounded-0 ms-2" color="primary">Reset Content</Button>
-               <Link to="/instructordashboard/pages" className="submitbutton1 pt-2 px-2 ms-2 btn btn-dark">Next</Link>
+            <div className="my-3">
+              <Label for="availableFrom">Available From</Label>
+              <Input
+                type="date"
+                id="availableFrom"
+                value={availableFrom}
+                onChange={(e) => setAvailableFrom(e.target.value)}
+                className="rounded-0"
+              />
+            </div>
+
+            <div className="my-3">
+              <Label for="availableUntil">Available Until</Label>
+              <Input
+                type="date"
+                id="availableUntil"
+                value={availableUntil}
+                onChange={(e) => setAvailableUntil(e.target.value)}
+                className="rounded-0"
+              />
+            </div>
+
+            <div className="my-3">
+              <Label for="LevelofPass">Completion Criteria</Label>
+              <Input
+                type="text"
+                id="LevelofPass"
+                value={completionCriteria}
+                onChange={(e) => setCompletionCriteria(e.target.value)}
+                className="rounded-0"
+                required
+              />
+            </div>
+
+            <div className="my-3">
+              <Label for="Restriction Access">Restriction</Label>
+              <Input
+                type="select"
+                id="RestrictionSelect"
+                onChange={handleModuleChange}
+                className="rounded-0"
+              >
+                <option>Select the Restriction</option>
+                <option value="">Viwed</option>
+                <option value="">Graded</option>
+              </Input>
+            </div>
+
+            <div className="my-3 w-75">
+              <Label for="groupMode">Group Mode</Label>
+              <Input
+                type="select"
+                id="groupMode"
+                value={groupMode}
+                onChange={(e) => setGroupMode(e.target.value)}
+                className="rounded-0"
+              >
+                <option value="">Select the mode</option>
+                <option value="group">Group Mode</option>
+                <option value="individual">Individual</option>
+              </Input>
+            </div>
+
+            <Container className="text-center">
+              <Button type="submit" className="rounded-0 ms-2" color="primary">
+                Submit Content
+              </Button>
+              <Button
+                type="reset"
+                className="rounded-0 ms-2"
+                color="secondary"
+                onClick={() => {
+                  setSelectedCourse("");
+                  setSelectedModule("");
+                  setDescription("");
+                  setPost({ title: "", content: "", categoryId: "" });
+                  setImage(null);
+                  setAvailableFrom("");
+                  setAvailableUntil("");
+                  setCompletionCriteria("");
+                  setGroupMode("");
+                }}
+              >
+                Reset Content
+              </Button>
             </Container>
           </Form>
-         </CardBody>
+        </CardBody>
       </Card>
-
-
     </div>
-   );
- };
+  );
+};
 
- export default Coursecontent;
+export default Coursecontent;
