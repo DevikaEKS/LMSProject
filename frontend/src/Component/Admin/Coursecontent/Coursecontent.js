@@ -82,7 +82,6 @@ const Coursecontent = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Prepare form data
     const formData = new FormData();
     formData.append("courseId", selectedCourseDetails.courseId);
     formData.append(
@@ -101,36 +100,40 @@ const Coursecontent = () => {
       formData.append("image", image);
     }
 
-    // Log the FormData content for debugging
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ": " + pair[1]);
-    }
-
-    // Sending data to the API
     axios
-      .post("http://localhost:5000/course/submitcontent", formData)
+      .post("http://localhost:5000/course/submitcon", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
-        console.log("Data submitted successfully:", response.data);
-        // Handle success
-        navigate("/instructordashboard/displaycontent", {
-          state: {
-            ...selectedCourseDetails,
-            moduleId: selectedModule,
-            description,
-            content: post.content,
-            availableFrom,
-            availableUntil,
-            completionCriteria,
-            groupMode,
-            image,
-          },
-        });
+        // console.log("Data submitted successfully:", response.data);
+        if (response.data.message === "Content submitted successfully") {
+          alert("Content submitted successfully");
+          navigate("/instructordashboard/displaycontent", {
+            state: {
+              ...selectedCourseDetails,
+              moduleId: selectedModule,
+              description,
+              content: post.content,
+              availableFrom,
+              availableUntil,
+              completionCriteria,
+              groupMode,
+              image,
+            },
+          });
+        } else if (response.data.error === "Failed to insert activity data") {
+          alert("Failed to insert activity data");
+        } else if (response.data.error === "Failed to insert context data") {
+          alert("Failed to insert context data");
+        } else if (response.data.error === "Failed to insert page data") {
+          alert("Failed to insert page data");
+        }
       })
       .catch((error) => {
-        console.error("Backend returned an error:", error.response);
-        // alert(
-        //   "Submission failed: " + error.response.data.message || "Unknown error"
-        // );
+        console.error("Backend returned an error:", error);
+        // Handle error
       });
   };
 
@@ -236,6 +239,20 @@ const Coursecontent = () => {
                 className="rounded-0"
                 required
               />
+            </div>
+
+            <div className="my-3">
+              <Label for="Restriction Access">Restriction</Label>
+              <Input
+                type="select"
+                id="RestrictionSelect"
+                onChange={handleModuleChange}
+                className="rounded-0"
+              >
+                <option>Select the Restriction</option>
+                <option value="">Viwed</option>
+                <option value="">Graded</option>
+              </Input>
             </div>
 
             <div className="my-3 w-75">

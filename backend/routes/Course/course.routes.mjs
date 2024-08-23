@@ -13,6 +13,6 @@ router.post("/addcourse", upload.single("courseImage"), addCourse);
 router.post("/addmodule", addModule);
 router.get("/getcourse", getCourse);
 router.get("/getmodule", getModule);
-router.post("/submitcontent", submitCourseContent);
+router.post('/submitcon', upload.single('image'), submitCourseContent);
 
 export default router;

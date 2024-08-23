@@ -112,13 +112,13 @@ export const getModule = (req, res) => {
   });
 };
 
-export const submitCourseContent = (req, res) => (req, res) => {
+export const submitCourseContent = (req, res) => {
   const {
     courseId,
     moduleId,
     submoduleId,
     description,
-    content, // Rich text content received here
+    content,
     availableFrom,
     availableUntil,
     completionCriteria,
@@ -126,77 +126,87 @@ export const submitCourseContent = (req, res) => (req, res) => {
     course_category_id,
   } = req.body;
 
-  console.log("hai");
+  const image = req.file ? req.file.path : null;
 
-  // const { image } = req.files;
+  console.log({
+    courseId,
+    moduleId,
+    description,
+    content,
+    availableFrom,
+    availableUntil,
+    completionCriteria,
+    groupMode,
+    course_category_id,
+    image,
+  });
 
-  // // Inserting into the `pages` table
-  // const insertPageQuery = `
-  //     INSERT INTO pages (courseid, moduleid, description, page_content)
-  //     VALUES (?, ?, ?, ?)
-  // `;
-  // const pageValues = [
-  //   courseId,
-  //   moduleId,
-  //   description,
-  //   image ? image.path : null,
-  // ];
+  // Inserting into the `pages` table
+  const insertPageQuery = `
+      INSERT INTO pages (courseid, moduleid, description, page_content)
+      VALUES (?, ?, ?, ?)
+  `;
+  const pageValues = [
+    courseId,
+    moduleId,
+    description,
+    content
+  ];
 
-  // db.query(insertPageQuery, pageValues, (err, result) => {
-  //   if (err) {
-  //     console.error("Error inserting into pages:", err);
-  //     return res.status(500).json({ error: "Failed to insert page data" });
-  //   }
+  db.query(insertPageQuery, pageValues, (err, result) => {
+    if (err) {
+      console.error("Error inserting into pages:", err);
+      return res.json({ error: "Failed to insert page data" });
+    }
 
-  //   const pageId = result.insertId;
+    const pageId = result.insertId;
 
-  //   // Construct the path for the context table
-  //   const path = `${course_category_id}/${courseId}`;
+    // Construct the path for the context table
+    const path = `${course_category_id}/${courseId}`;
 
-  //   // Inserting into the `context` table
-  //   const insertContextQuery = `
-  //         INSERT INTO context (instanceid, path, contextlevel)
-  //         VALUES (?, ?, ?)
-  //     `;
-  //   const contextValues = [courseId, path, 3];
+    // Inserting into the `context` table
+    const insertContextQuery = `
+          INSERT INTO context (instanceid, path, contextlevel)
+          VALUES (?, ?, ?)
+      `;
+    const contextValues = [courseId, path, 3];
 
-  //   db.query(insertContextQuery, contextValues, (err, result) => {
-  //     if (err) {
-  //       console.error("Error inserting into context:", err);
-  //       return res.status(500).json({ error: "Failed to insert context data" });
-  //     }
+    db.query(insertContextQuery, contextValues, (err, result) => {
+      if (err) {
+        console.error("Error inserting into context:", err);
+        return res.json({ error: "Failed to insert context data" });
+      }
 
-  //     const contextId = result.insertId;
+      const contextId = result.insertId;
 
-  //     // Inserting into the `activity` table
-  //     const insertActivityQuery = `
-  //             INSERT INTO activity (pageid, context_id, available_from, available_until, completion_criteria, group_mode)
-  //             VALUES (?, ?, ?, ?, ?, ?)
-  //         `;
-  //     const activityValues = [
-  //       pageId,
-  //       contextId,
-  //       availableFrom,
-  //       availableUntil,
-  //       completionCriteria,
-  //       groupMode,
-  //     ];
+      // Inserting into the `activity` table
+      const insertActivityQuery = `
+              INSERT INTO activity (pageid, context_id, available_from, available_until, completion_criteria, group_mode)
+              VALUES (?, ?, ?, ?, ?, ?)
+          `;
+      const activityValues = [
+        pageId,
+        contextId,
+        availableFrom,
+        availableUntil,
+        completionCriteria,
+        groupMode,
+      ];
 
-  //     db.query(insertActivityQuery, activityValues, (err, result) => {
-  //       if (err) {
-  //         console.error("Error inserting into activity:", err);
-  //         return res
-  //           .status(500)
-  //           .json({ error: "Failed to insert activity data" });
-  //       }
+      db.query(insertActivityQuery, activityValues, (err, result) => {
+        if (err) {
+          console.error("Error inserting into activity:", err);
+          return res
+            .json({ error: "Failed to insert activity data" });
+        }
 
-  //       res.status(200).json({
-  //         message: "Content submitted successfully",
-  //         pageId,
-  //         contextId,
-  //         activityId: result.insertId,
-  //       });
-  //     });
-  //   });
-  // });
+        res.status(200).json({
+          message: "Content submitted successfully",
+          pageId,
+          contextId,
+          activityId: result.insertId,
+        });
+      });
+    });
+  });
 };
