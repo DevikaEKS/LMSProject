@@ -2,11 +2,7 @@ form {
     width: 100%;
 }
   
-/* .form-group-inner {
-    display: flex;
-    align-items: center; 
-    margin-bottom: 1rem; 
-} */
+
 .form-group-inner label {
     flex: 0 0 400px; 
     font-weight: bold;
@@ -21,9 +17,7 @@ form {
     border: 0px;
 }
 .frmbg{
-    background-image: url("../../../Asset/bgpart.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+   background-color: rgb(209, 180, 235);
     height: 100vh;
 }
 

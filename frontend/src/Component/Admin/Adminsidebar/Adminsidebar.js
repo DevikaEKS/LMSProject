@@ -96,8 +96,8 @@ function Adminsidebar() {
       </div>
       <ul>
         <li>
-          <Link to="/">
-            <FontAwesomeIcon icon={faHome} className='mx-1 text-light'/>
+          <Link to="/admindashboard/coursedetail" className='disabled-link'>
+            <FontAwesomeIcon icon={faHome} className='mx-1 text-light '/>
             <motion.span variants={linkVariants} className='text-white text-decoration-none '>Home</motion.span>
           </Link>
         </li>

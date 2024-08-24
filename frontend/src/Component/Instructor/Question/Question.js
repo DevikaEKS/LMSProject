@@ -84,7 +84,7 @@ const Question = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid bgpurplecard py-5">
       <div className="question-type-dropdown d-flex justify-content-around" style={{ marginBottom: '10px' }}>
         <div>
           <label htmlFor="questionType">Select Question Type:</label>
@@ -108,15 +108,11 @@ const Question = () => {
         </div>
       </div>
 
-      <JoditEditor
-        ref={editorRef}
-        value={content}
+      <JoditEditor ref={editorRef} value={content}
         config={{
           readonly: false,
           toolbar: true,
-        }}
-        onBlur={handleEditorChange}
-      />
+        }} onBlur={handleEditorChange}/>
 
       {questionType === 'true/false' && (
         <div className="true-false-options" style={{ marginTop: '10px' }}>

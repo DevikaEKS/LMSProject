@@ -7,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function RegisterPage() {
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     phno: "",
@@ -48,6 +48,10 @@ function RegisterPage() {
     return Object.keys(tempErrors).length === 0;
   };
 
+  const handleLoginClick = () => {
+    navigate("/login"); // Ensure '/login' is the correct path for your login page
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
@@ -62,7 +66,7 @@ function RegisterPage() {
         .then((res) => {
           if (res.data.message === "User registered successfully.") {
             toast.success("Registration Success");
-            // nav("/login");
+            navigate("/login"); // Redirect to login page after successful registration
           } else if (res.data.message === "All fields are required.") {
             toast.error("All fields are required.");
           } else if (
@@ -174,6 +178,9 @@ function RegisterPage() {
               </button>
             </div>
           </form>
+          <p>Already have an account? <span className="register-link fw-bold" onClick={handleLoginClick}>
+            Login
+          </span></p>
         </div>
         <div className="login-image">
           <img src={regim} alt="register" />

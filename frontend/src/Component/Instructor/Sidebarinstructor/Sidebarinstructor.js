@@ -33,7 +33,7 @@ function Sidebarinstructor() {
       </div>
       <ul>
         <li>
-            <Link to={"/instructordashboard/coursedetail"} className='d-flex'><FontAwesomeIcon icon={faHome} className='mx-1 text-light mt-1'/>
+            <Link to={"/instructordashboard/courselist"} className='d-flex'><FontAwesomeIcon icon={faHome} className='mx-1 text-light mt-1'/>
           <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Home</motion.span>
           </Link>
         </li>
@@ -53,7 +53,11 @@ function Sidebarinstructor() {
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Quiz</motion.span>
             </Link>
         </li>
-       
+        <li>
+            <Link to="/instructordashboard/questionbank" className='d-flex'><FontAwesomeIcon icon={faPowerOff} className='mx-1 text-light mt-1'/>
+            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1 '>Question Bank</motion.span>
+            </Link>
+        </li>
         <li>
             <Link to="/" className='d-flex'><FontAwesomeIcon icon={faPowerOff} className='mx-1 text-light mt-1'/>
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1 '>Logout</motion.span>

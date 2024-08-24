@@ -37,6 +37,7 @@ import EditorComponent from './Component/Instructor/Rcheditor/Rcheditor';
 import Question from './Component/Instructor/Question/Question';
 import DisplayContent from "./Component/Admin/Coursecontent/DisplayContent";
 import CategoryQuizList from "./Component/Instructor/Questionbank/CategoryQuizList";
+import Courselist from "./Component/Instructor/Courselist/Courselist";
 // import RichTextEditor from './Component/Instructor/Richtexteditor/Richtexteditor';
 
 
@@ -80,18 +81,19 @@ function App() {
           </Route>
 
           <Route path="/instructordashboard/*" element={<Dashboardinstructor />} >
-            <Route path="coursedetail" element={<CourseDetail />} />
+            <Route path="courselist" element={<Courselist/>} />
             <Route path="coursecontent" element={<Coursecontent />} />
             <Route path="displaycontent" element={<DisplayContent />} />
             <Route path="coursemodule" element={<Modulepage />} />
             <Route path="quilltxt" element={[<CategoryDropdown />, <Question />]} />
+            <Route path="questionbank" element={<CategoryQuizList />} />
           </Route>
           <Route path='/instructorsidebar' element={<Sidebarinstructor />} />
           <Route path='/teacherdashboard/*' element={<Dashboardinstructor />}></Route>
           <Route path='/dropdowncategory' element={<CategoryDropdown />} />
           <Route path='/editor' element={<EditorComponent />} />
           <Route path='/questioncreation' element={<Question />} />
-          <Route path="/questionbank" element={<CategoryQuizList />} />
+
         </Routes>
       </BrowserRouter>
     </div>

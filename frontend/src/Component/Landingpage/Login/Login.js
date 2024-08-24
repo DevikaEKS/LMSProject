@@ -102,7 +102,7 @@ function Login() {
               </button>
             </div>
             Don't have an account?{" "}
-            <span className="register-link" onClick={handleRegisterClick}>
+            <span className="register-link fw-bold loginclr" onClick={handleRegisterClick}>
               Register
             </span>
           </form>

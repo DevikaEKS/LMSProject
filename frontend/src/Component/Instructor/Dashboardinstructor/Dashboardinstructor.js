@@ -9,10 +9,10 @@ const Dashboardinstructor = () => {
   return (
    <div className='container-fluid'>
     <div className='row'>
-     <div className='col-sm-2 col-md-1'>
+     <div className='col-sm-2 '>
      <Sidebarinstructor/>
       </div>
-      <div className='col-sm-10 col-md-11'>
+      <div className='col-sm-10'>
       <div className="dashboard-content">
     <Outlet />
       </div>

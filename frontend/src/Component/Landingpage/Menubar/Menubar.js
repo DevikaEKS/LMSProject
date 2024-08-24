@@ -53,7 +53,7 @@ function Menubar() {
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/activecourse">MyCourses</Nav.Link>
+            <Nav.Link as={Link} to="/activecourse" >MyCourses</Nav.Link>
        
             <Nav.Item>
             <div className='box mt-1 mx-2'>
