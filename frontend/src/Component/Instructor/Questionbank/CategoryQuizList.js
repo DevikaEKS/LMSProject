@@ -1,101 +1,191 @@
-// import React, { useState } from 'react';
-// import * as XLSX from 'xlsx';
+// import React, { useState, useEffect } from 'react';
+// import quizData from './quizData.json'; 
+// import "./CategoryQuizList.css";
 
 // const CategoryQuizList = () => {
 //   const [categories, setCategories] = useState([]);
-//   const [selectedCategory, setSelectedCategory] = useState(null);
 //   const [quizzes, setQuizzes] = useState([]);
+//   const [selectedCategory, setSelectedCategory] = useState('');
 //   const [selectedQuizzes, setSelectedQuizzes] = useState({});
+//   const [addedQuizzes, setAddedQuizzes] = useState([]);
+//   const [marks, setMarks] = useState({});
+//   const [headerMarks, setHeaderMarks] = useState('');
 
-//   // Handle file upload and parse the Excel file
-//   const handleFileUpload = (event) => {
-//     const file = event.target.files[0];
-//     if (file) {
-//       const reader = new FileReader();
-//       reader.onload = (e) => {
-//         const data = new Uint8Array(e.target.result);
-//         const workbook = XLSX.read(data, { type: 'array' });
-//         const sheetName = workbook.SheetNames[0];
-//         const worksheet = workbook.Sheets[sheetName];
-//         const jsonData = XLSX.utils.sheet_to_json(worksheet);
+//   useEffect(() => {
+//     const uniqueCategories = Array.from(new Set(quizData.map(item => item.Category)));
+//     setCategories(uniqueCategories);
+//     setQuizzes(quizData);
+//   }, []);
 
-//         // Separate categories and quizzes
-//         const categories = Array.from(new Set(jsonData.map(item => item.Category)));
-//         setCategories(categories);
-
-//         // Store all quizzes
-//         setQuizzes(jsonData);
-//       };
-//       reader.readAsArrayBuffer(file);
-//     }
+//   const handleCategoryChange = (event) => {
+//     setSelectedCategory(event.target.value);
 //   };
 
-//   // Handle category click
-//   const handleCategoryClick = (category) => {
-//     const filteredQuizzes = quizzes.filter(quiz => quiz.Category === category);
-//     setSelectedCategory(category);
-//     setQuizzes(filteredQuizzes);
-//   };
-
-//   // Handle checkbox change
 //   const handleCheckboxChange = (quizId) => {
 //     setSelectedQuizzes(prev => {
 //       const updated = { ...prev };
 //       if (updated[quizId]) {
 //         delete updated[quizId];
+//         setMarks(prevMarks => {
+//           const updatedMarks = { ...prevMarks };
+//           delete updatedMarks[quizId];
+//           return updatedMarks;
+//         });
 //       } else {
 //         updated[quizId] = true;
+//         setMarks(prevMarks => ({
+//           ...prevMarks,
+//           [quizId]: headerMarks
+//         }));
 //       }
 //       return updated;
 //     });
 //   };
 
+//   const handleMarksChange = (quizId, value) => {
+//     setMarks(prevMarks => ({
+//       ...prevMarks,
+//       [quizId]: value
+//     }));
+//   };
+
+//   const handleHeaderMarksChange = (event) => {
+//     const value = event.target.value;
+//     setHeaderMarks(value);
+//     setMarks(prevMarks => {
+//       const updatedMarks = { ...prevMarks };
+//       Object.keys(selectedQuizzes).forEach(quizId => {
+//         if (selectedQuizzes[quizId]) {
+//           updatedMarks[quizId] = value;
+//         }
+//       });
+//       return updatedMarks;
+//     });
+//   };
+
+//   const handleAddQuizzes = () => {
+//     const selectedQuizList = quizzes.filter(quiz => selectedQuizzes[quiz['Quiz ID']]);
+//     const updatedQuizList = selectedQuizList.map(quiz => ({
+//       ...quiz,
+//       Marks: marks[quiz['Quiz ID']] || ''
+//     }));
+//     setAddedQuizzes(prev => [...prev, ...updatedQuizList]);
+//     setSelectedQuizzes({});
+//     setMarks({});
+//   };
+
+//   const filteredQuizzes = quizzes.filter(quiz => quiz.Category === selectedCategory);
+
 //   return (
 //     <div className='container-fluid'>
-//       <h1>Upload Quiz</h1>
-      
-//       {/* Upload Button */}
-//       <input
-//         type="file"
-//         accept=".xlsx, .xls"
-//         onChange={handleFileUpload}
-//         style={{ marginBottom: '20px' }}
-//       />
-      
-//       {/* Display Categories */}
-//       {categories.length > 0 && !selectedCategory && (
-//         <div>
+//       <div className='frmshadow m-4 p-2'>
+//         <h1>Quiz Management</h1>
+
+//         <div style={{ marginBottom: '20px' }}>
 //           <h2>Categories</h2>
-//           <ol>
+//           <select
+//             value={selectedCategory}
+//             onChange={handleCategoryChange}
+//             style={{ width: '50%', padding: '10px' }}
+//           >
+//             <option value="">Select a category</option>
 //             {categories.map((category, index) => (
-//               <li key={index}>
-//                 <button onClick={() => handleCategoryClick(category)} className='btn btn-light border-0 mx-4'>{category}</button>
+//               <option key={index} value={category}>
+//                 {category}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         {selectedCategory && (
+//           <div style={{ marginTop: '20px' }}>
+//             <h2>Quizzes</h2>
+//             <table className='table'>
+//               <thead>
+//                 <tr className='bghead'>
+//                   <th>Select</th>
+//                   <th>Question ID</th>
+//                   <th>Question Text</th>
+//                   <th>Usage Frequency</th>
+//                   <th>
+//                     Marks
+//                     <input
+//                       type="number"
+//                       placeholder="Set Mark"
+//                       value={headerMarks}
+//                       onChange={handleHeaderMarksChange}
+//                       style={{ marginLeft: '10px', width: '100px' }}
+//                     />
+//                   </th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {filteredQuizzes.map((quiz, index) => (
+//                   <tr key={index}>
+//                     <td>
+//                       <input
+//                         type="checkbox"
+//                         checked={!!selectedQuizzes[quiz['Quiz ID']]}
+//                         onChange={() => handleCheckboxChange(quiz['Quiz ID'])}
+//                       />
+//                     </td>
+//                     <td>{quiz['Quiz ID']}</td>
+//                     <td>{quiz.Question}</td>
+//                     <td>{quiz['Usage Frequency'] || 'N/A'}</td>
+//                     <td>
+//                       <input
+//                         type="number"
+//                         value={marks[quiz['Quiz ID']] || ''}
+//                         onChange={(e) => handleMarksChange(quiz['Quiz ID'], e.target.value)}
+//                         disabled={!selectedQuizzes[quiz['Quiz ID']]}
+//                       />
+//                     </td>
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+
+// {/* sequential flow */}
+// <div>
+// <label>Set Time</label>
+// <input type='number'/><br/>
+// <h4>Question View Type</h4>
+// <input type='radio' className='me-3 ms-1'/>
+// <label>Sequential</label>
+// <input type='radio' className='mx-3'/>
+// <label>Random</label>
+// </div>
+
+// {/* //end of sequence */}
+
+//             <button onClick={handleAddQuizzes} style={{ marginTop: '20px' }}>
+//               Add Selected Quizzes
+//             </button>
+//           </div>
+//         )}
+
+//         <div style={{ marginTop: '20px' }}>
+//           <h2>Added Quizzes</h2>
+//           <ol>
+//             {addedQuizzes.map((quiz, index) => (
+//               <li key={index} style={{ marginBottom: '10px' }}>
+//                 <div><strong>Question:</strong> {quiz.Question}</div>
+//                 <div><strong>Marks:</strong> {quiz.Marks}</div>
+//                 <div><strong>Options:</strong></div>
+//                 <ol>
+//                   {['Option 1', 'Option 2', 'Option 3', 'Option 4'].map((option, idx) => (
+//                     <li key={idx} type="A">
+//                       <input type="checkbox" disabled />
+//                       {quiz[option]}
+//                     </li>
+//                   ))}
+//                 </ol>
+//                 <div><strong>Correct Option:</strong> {quiz['Correct Option']}</div>
 //               </li>
 //             ))}
 //           </ol>
 //         </div>
-//       )}
-
-//       {/* Display Quizzes */}
-//       {selectedCategory && (
-//         <div>
-//           <h2>{selectedCategory} Quizzes</h2>
-//           <ul>
-//             {quizzes.map((quiz, index) => (
-//               <li key={index} style={{ marginBottom: '10px' }}>
-//                 <label>
-//                   <input
-//                     type="checkbox"
-//                     checked={!!selectedQuizzes[quiz['Quiz ID']]}
-//                     onChange={() => handleCheckboxChange(quiz['Quiz ID'])}
-//                   />
-//                   {quiz.Question}
-//                 </label>
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       )}
+//       </div>
 //     </div>
 //   );
 // };
@@ -103,103 +193,109 @@
 // export default CategoryQuizList;
 
 
-
-
-import React, { useState } from 'react';
-import * as XLSX from 'xlsx';
+import React, { useState, useEffect } from 'react';
+import quizData from './quizData.json'; 
 import "./CategoryQuizList.css";
 
 const CategoryQuizList = () => {
   const [categories, setCategories] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
   const [quizzes, setQuizzes] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedQuizzes, setSelectedQuizzes] = useState({});
   const [addedQuizzes, setAddedQuizzes] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [marks, setMarks] = useState('');
+  const [marks, setMarks] = useState({});
+  const [headerMarks, setHeaderMarks] = useState('');
+  const [maxRandomValue, setMaxRandomValue] = useState('');
+  const [viewType, setViewType] = useState('Sequential');
 
-  // Handle file upload and parse the Excel file
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet);
+  useEffect(() => {
+    const uniqueCategories = Array.from(new Set(quizData.map(item => item.Category)));
+    setCategories(uniqueCategories);
+    setQuizzes(quizData);
+  }, []);
 
-        // Separate categories and quizzes
-        const categories = Array.from(new Set(jsonData.map(item => item.Category)));
-        setCategories(categories);
-
-        // Store all quizzes
-        setQuizzes(jsonData);
-      };
-      reader.readAsArrayBuffer(file);
-    }
-  };
-
-  // Handle category change
   const handleCategoryChange = (event) => {
-    const category = event.target.value;
-    setSelectedCategory(category);
-    setSelectedCategories(prev => {
-      const updatedCategories = category ? [category] : [];
-      const filteredQuizzes = quizzes.filter(quiz => updatedCategories.includes(quiz.Category));
-      setQuizzes(filteredQuizzes);
-      return updatedCategories;
-    });
+    setSelectedCategory(event.target.value);
   };
 
-  // Handle checkbox change
   const handleCheckboxChange = (quizId) => {
     setSelectedQuizzes(prev => {
       const updated = { ...prev };
       if (updated[quizId]) {
         delete updated[quizId];
+        setMarks(prevMarks => {
+          const updatedMarks = { ...prevMarks };
+          delete updatedMarks[quizId];
+          return updatedMarks;
+        });
       } else {
         updated[quizId] = true;
+        setMarks(prevMarks => ({
+          ...prevMarks,
+          [quizId]: headerMarks // Set headerMarks for new selection
+        }));
       }
       return updated;
     });
   };
 
-  // Handle marks input change
-  const handleMarksChange = (event) => {
-    setMarks(event.target.value);
+  const handleMarksChange = (quizId, value) => {
+    setMarks(prevMarks => ({
+      ...prevMarks,
+      [quizId]: value
+    }));
   };
 
-  // Add selected quizzes to the list
+  const handleHeaderMarksChange = (event) => {
+    const value = event.target.value;
+    setHeaderMarks(value);
+    setMarks(prevMarks => {
+      const updatedMarks = { ...prevMarks };
+      Object.keys(selectedQuizzes).forEach(quizId => {
+        if (selectedQuizzes[quizId]) {
+          updatedMarks[quizId] = value;
+        }
+      });
+      return updatedMarks;
+    });
+  };
+
   const handleAddQuizzes = () => {
     const selectedQuizList = quizzes.filter(quiz => selectedQuizzes[quiz['Quiz ID']]);
     const updatedQuizList = selectedQuizList.map(quiz => ({
       ...quiz,
-      Marks: marks
+      Marks: marks[quiz['Quiz ID']] || ''
     }));
     setAddedQuizzes(prev => [...prev, ...updatedQuizList]);
     setSelectedQuizzes({});
-    setMarks('');
+    setMarks({});
   };
+
+  const handleMaxRandomValueChange = (event) => {
+    const value = Number(event.target.value);
+    const numberOfBoxes = Object.keys(selectedQuizzes).length;
+    if (value >= 0 && value <= numberOfBoxes) {
+      setMaxRandomValue(value);
+    } 
+    // else {
+    //   alert('Value must be between 0 and the number of selected quizzes.');
+    // }
+  };
+
+  const handleViewTypeChange = (type) => {
+    setViewType(type);
+    if (type === 'Random') {
+      handleMaxRandomValueChange({ target: { value: maxRandomValue } }); // Ensure value is valid
+    }
+  };
+
+  const filteredQuizzes = quizzes.filter(quiz => quiz.Category === selectedCategory);
 
   return (
     <div className='container-fluid'>
-        <div className='frmshadow m-4 p-2'>
-      <h1>Upload Quiz</h1>
-      
-      {/* Upload Button */}
-      <input
-        type="file"
-        accept=".xlsx, .xls"
-        onChange={handleFileUpload}
-        style={{ marginBottom: '20px' }}
-      />
-      
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        {/* Display Categories and Marks Input */}
-        <div style={{ flex: 1 }}>
-          <h2>Categories</h2>
+      <div className='frmshadow m-4 p-2'>
+        <div style={{ marginBottom: '20px' }}>
+          <h5>Categories</h5>
           <select
             value={selectedCategory}
             onChange={handleCategoryChange}
@@ -212,53 +308,106 @@ const CategoryQuizList = () => {
               </option>
             ))}
           </select>
+        </div>
 
-          {/* Marks Input */}
+        {selectedCategory && (
           <div style={{ marginTop: '20px' }}>
-            <label>
-              Marks:
-              <input
-                type="number"
-                value={marks}
-                onChange={handleMarksChange}
-                style={{ marginLeft: '10px', width: '100px' }}
-              />
-            </label>
-          </div>
-
-          {/* Display Quizzes */}
-          {selectedCategory && (
-            <div style={{ marginTop: '20px' }}>
-              <h2>Quizzes</h2>
-              <ol>
-                {quizzes.map((quiz, index) => (
-                  <li key={index} style={{ marginBottom: '10px' }}>
-                    <label
-                      style={{
-                        fontWeight: !!selectedQuizzes[quiz['Quiz ID']] ? 'bold' : 'normal',
-                        color: !!selectedQuizzes[quiz['Quiz ID']] ? 'red' : 'black',
-                      }}
-                    >
+            <h2>Quizzes</h2>
+            <table className='table'>
+              <thead>
+                <tr className='bghead'>
+                  <th>Select</th>
+                  <th>Question ID</th>
+                  <th>Question Text</th>
+                  <th>Usage Frequency</th>
+                  <th>
+                    Marks
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder="Set Mark"
+                      value={headerMarks}
+                      onChange={handleHeaderMarksChange}
+                      style={{ marginLeft: '10px', width: '100px' }}
+                    />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredQuizzes.map((quiz, index) => (
+                  <tr key={index}>
+                    <td>
                       <input
                         type="checkbox"
                         checked={!!selectedQuizzes[quiz['Quiz ID']]}
                         onChange={() => handleCheckboxChange(quiz['Quiz ID'])}
                       />
-                      {quiz.Question}
-                    </label>
-                  </li>
+                    </td>
+                    <td>{quiz['Quiz ID']}</td>
+                    <td>{quiz.Question}</td>
+                    <td>{quiz['Usage Frequency'] || 'N/A'}</td>
+                    <td>
+                      <input
+                        type="number"
+                        min="0"
+                        value={marks[quiz['Quiz ID']] || ''}
+                        onChange={(e) => handleMarksChange(quiz['Quiz ID'], e.target.value)}
+                        disabled={!selectedQuizzes[quiz['Quiz ID']]}
+                      />
+                    </td>
+                  </tr>
                 ))}
-              </ol>
-              <button onClick={handleAddQuizzes} style={{ marginTop: '20px' }}>
-                Add Selected Quizzes
-              </button>
-            </div>
-          )}
-        </div>
+              </tbody>
+            </table>
 
-        {/* Display Added Quizzes */}
-        <div style={{ flex: 1, marginLeft: '20px' }}>
-          <h2>Added Quizzes</h2>
+            <div>
+              <label>Set Time</label>
+              <input type='number' min="0"/><br/>
+              <h4>Question View Type</h4>
+              <input 
+                type='radio' 
+                name='viewType'
+                className='me-3 ms-1'
+                checked={viewType === 'Sequential'}
+                onChange={() => handleViewTypeChange('Sequential')}
+              />
+              <label>Sequential</label>
+              <input 
+                type='radio' 
+                name='viewType'
+                className='mx-3'
+                checked={viewType === 'Random'}
+                onChange={() => handleViewTypeChange('Random')}
+              />
+              <label>Random</label>
+            </div>
+
+            {viewType === 'Random' && (
+              <div>
+                <label>Max Number of Random Inputs</label>
+                <input
+                  type="number"
+                  min="0"
+                  value={maxRandomValue}
+                  onChange={handleMaxRandomValueChange}
+                />
+                {/* {Array.from({ length: Number(maxRandomValue) }, (_, index) => (
+                  <div key={index}>
+                    <label>Input {index}</label>
+                    <input type="number" min="0" />
+                  </div>
+                ))} */}
+              </div> 
+            )}
+
+            <button onClick={handleAddQuizzes} style={{ marginTop: '20px' }}>
+              Add Selected Quizzes
+            </button>
+          </div>
+        )}
+
+        <div style={{ marginTop: '20px' }}>
+          <h5>Added Quizzes</h5>
           <ol>
             {addedQuizzes.map((quiz, index) => (
               <li key={index} style={{ marginBottom: '10px' }}>
@@ -279,18 +428,9 @@ const CategoryQuizList = () => {
           </ol>
         </div>
       </div>
-      </div>
     </div>
   );
 };
 
 export default CategoryQuizList;
-
-
-
-
-
-
-
-
 

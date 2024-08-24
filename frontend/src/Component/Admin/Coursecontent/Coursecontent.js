@@ -1,13 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Card,
-  CardBody,
-  Form,
-  Input,
-  Label,
-  Button,
-  Container,
-} from "reactstrap";
+import { Card,CardBody,Form,Input,Label,Button,Container} from "reactstrap";
 import JoditEditor from "jodit-react";
 import axios from "axios";
 import "./Coursecontent.css";
@@ -17,7 +9,7 @@ const Coursecontent = () => {
   const editor = useRef(null);
   const [courses, setCourses] = useState([]);
   const [modules, setModules] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState(""); // ensure this is consistent with course.id type
+  const [selectedCourse, setSelectedCourse] = useState(""); 
   const [selectedModule, setSelectedModule] = useState("");
   const [description, setDescription] = useState("");
   const [post, setPost] = useState({
@@ -81,7 +73,6 @@ const Coursecontent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const formData = new FormData();
     formData.append("courseId", selectedCourseDetails.courseId);
     formData.append(
@@ -107,7 +98,6 @@ const Coursecontent = () => {
         },
       })
       .then((response) => {
-        // console.log("Data submitted successfully:", response.data);
         if (response.data.message === "Content submitted successfully") {
           alert("Content submitted successfully");
           navigate("/instructordashboard/displaycontent", {
@@ -133,13 +123,12 @@ const Coursecontent = () => {
       })
       .catch((error) => {
         console.error("Backend returned an error:", error);
-        // Handle error
       });
   };
 
   return (
-    <div className="container-fluid wrapper">
-      <Card className="mx-5 shadow-sm border-0 mt-2 bgpurplecard">
+    <div className="container-fluid wrapper bgpurplecard py-5">
+      <Card className="mx-5 shadow-sm border-0 pt-4">
         <CardBody>
           <h3>Page Content</h3>
           <Form onSubmit={handleSubmit}>
@@ -250,7 +239,7 @@ const Coursecontent = () => {
                 className="rounded-0"
               >
                 <option>Select the Restriction</option>
-                <option value="">Viwed</option>
+                <option value="">Viewed</option>
                 <option value="">Graded</option>
               </Input>
             </div>

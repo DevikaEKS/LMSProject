@@ -9,8 +9,8 @@ function Categorycreation() {
   const handleAddCategory = () => {
     if (newCategory.trim() !== "") {
       setCategories([...categories, newCategory]);
-      setNewCategory(""); // Clear input after adding
-      setShowInput(false); // Hide input after adding
+      setNewCategory(""); 
+      setShowInput(false); 
     }
   };
 
@@ -29,9 +29,7 @@ function Categorycreation() {
           </select>
           <button
             className=' ms-2 plusbtn'
-            onClick={() => setShowInput(!showInput)}
-          >
-            +
+            onClick={() => setShowInput(!showInput)} > +
           </button>
         </div>
 
@@ -42,14 +40,8 @@ function Categorycreation() {
               value={newCategory}
               onChange={(e) => setNewCategory(e.target.value)}
               placeholder='Enter new category'
-              className='form-control'
-            />
-            <button
-              className='btnaddcategory mt-2 rounded-2'
-              onClick={handleAddCategory}
-            >
-              Add
-            </button>
+              className='form-control'/>
+            <button className='btnaddcategory mt-2 rounded-2'onClick={handleAddCategory}> Add</button>
           </div>
         )}
       </div>

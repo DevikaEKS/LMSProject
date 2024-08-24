@@ -37,8 +37,8 @@ function RegisterPage() {
     if (!formData.email || !emailRegex.test(formData.email)) {
       tempErrors.email = "Invalid email format.";
     }
-    if (!formData.password || formData.password.length < 6) {
-      tempErrors.password = "Password must be at least 6 characters long.";
+    if (!formData.password || formData.password.length < 8) {
+      tempErrors.password = "Password must be at least 8 characters long.";
     }
     if (formData.password !== formData.password2) {
       tempErrors.password2 = "Passwords do not match.";

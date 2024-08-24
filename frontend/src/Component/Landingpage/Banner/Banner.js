@@ -27,14 +27,20 @@ function Banner() {
   <img src={bannerim2} className='subjectimg'/>
 </div>
 <div className='col-sm-12 col-md-6 col-lg-6 mt-5'>
-    <h1 className='mt-5'>It’s time to Build Your <span style={{color:'#841ECC'}}>Skills </span></h1>
+    <h1 className='mt-5 mb-3'>It’s time to Build Your <span style={{color:'#841ECC'}}>Skills </span></h1>
     <div>
-      <h4 style={{color:'#841ECC'}}><FontAwesomeIcon icon={faBook} className='ic mx-1'/>Learn Courses </h4>
-      <p>Start learning courses based on your interest and build your skills practically</p>
-      <h4 style={{color:'#841ECC'}}><FontAwesomeIcon icon={faClipboardList} className='mx-1 ic' />Attend Quiz</h4>
+      <div className='my-3'>
+      <h4 style={{color:'#841ECC'}}><FontAwesomeIcon icon={faBook} className='ic mx-1 pe-2'/>Learn Courses </h4>
+      <p>Start learning courses and build your skills</p>
+      </div>
+      <div className='my-3'>
+      <h4 style={{color:'#841ECC'}}><FontAwesomeIcon icon={faClipboardList} className='mx-1 pe-2 ic' />Attend Quiz</h4>
       <p>Attend quiz and test your skills</p>
-      <h4 style={{color:'#841ECC'}}><FontAwesomeIcon icon={faLaptopCode} className='mx-1 ic'/>Create Your Projects</h4>
+      </div>
+      <div className='my-3'>
+      <h4 style={{color:'#841ECC'}}><FontAwesomeIcon icon={faLaptopCode} className='mx-1 pe-2 ic'/>Create Your Projects</h4>
       <p>Finally you reached it's time to build project with the skills you gained</p>
+      </div>
     </div>
 </div>
 </div>

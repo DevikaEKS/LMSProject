@@ -170,11 +170,6 @@ const Questionbank = () => {
         </div>
       </div>
 
-
-
-
-
-
     </div>
     </div>
   );

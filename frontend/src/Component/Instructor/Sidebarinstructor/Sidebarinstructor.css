@@ -53,3 +53,7 @@
     }
   }
   
+  a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent */
+  }

@@ -101,22 +101,18 @@ function Adminsidebar() {
             <motion.span variants={linkVariants} className='text-white text-decoration-none '>Home</motion.span>
           </Link>
         </li>
-
         <li>
           <Link to="/admindashboard/admincredential">
             <FontAwesomeIcon icon={faUser} className='mx-1 text-light'/>
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>User Registration</motion.span>
           </Link>
-        </li>
-
-        
+        </li>      
         <li>
           <Link to="/admindashboard/category">
             <FontAwesomeIcon icon={faLayerGroup} className='mx-1 text-light'/>
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Add Category</motion.span>
           </Link>
         </li>
-
         <li>
           <Link to="/admindashboard/coursedetail">
             <FontAwesomeIcon icon={faFileLines} className='mx-1 text-light'/>
@@ -127,12 +123,6 @@ function Adminsidebar() {
           <Link to="/admindashboard/courseupdate">
             <FontAwesomeIcon icon={faFile} className='mx-1 text-light'/>
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Add Courses</motion.span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/">
-            <FontAwesomeIcon icon={faUser} className='mx-1 text-light'/>
-            <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Participants</motion.span>
           </Link>
         </li>
         <li>
