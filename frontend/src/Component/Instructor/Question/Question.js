@@ -2,7 +2,9 @@ import React, { useState, useRef } from 'react';
 import JoditEditor from 'jodit-react';
 import * as XLSX from 'xlsx';
 import "./Question.css";
-
+import DropdownTreeSelect from 'react-dropdown-tree-select';
+import 'react-dropdown-tree-select/dist/styles.css';
+import { FaUpload } from 'react-icons/fa';
 const Question = () => {
   const [content, setContent] = useState(''); 
   const [questionType, setQuestionType] = useState('multiple choice'); 
@@ -11,20 +13,134 @@ const Question = () => {
   const [feedbacks, setFeedbacks] = useState(['', '', '', '']); 
   const [showFeedback, setShowFeedback] = useState([false, false, false, false]); 
   const [keywords, setKeywords] = useState([{ keyword: '', marks: '' }]); 
-  const [uploadedQuestions, setUploadedQuestions] = useState([]); 
+  const [uploadedQuestions, setUploadedQuestions] = useState([]);
+  const [selected, setSelected] = useState([]); 
   const editorRef = useRef(null);
 
+  const data = [
+    {
+      label: 'Category 1',
+      value: 'category-1',
+      children: [
+        {
+          label: 'Course 1.1',
+          value: 'course-1-1',
+          children: [
+            {
+              label: 'Module 1.1.1',
+              value: 'module-1-1-1',
+              children: [
+                {
+                  label: 'Submodule 1.1.1.1',
+                  value: 'submodule-1-1-1-1',
+                },
+                {
+                  label: 'Submodule 1.1.1.2',
+                  value: 'submodule-1-1-1-2',
+                },
+              ],
+            },
+            {
+              label: 'Module 1.1.2',
+              value: 'module-1-1-2',
+              children: [
+                {
+                  label: 'Submodule 1.1.2.1',
+                  value: 'submodule-1-1-2-1',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Course 1.2',
+          value: 'course-1-2',
+          children: [
+            {
+              label: 'Module 1.2.1',
+              value: 'module-1-2-1',
+              children: [
+                {
+                  label: 'Submodule 1.2.1.1',
+                  value: 'submodule-1-2-1-1',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Category 2',
+      value: 'category-2',
+      children: [
+        {
+          label: 'Course 2.1',
+          value: 'course-2-1',
+          children: [
+            {
+              label: 'Module 2.1.1',
+              value: 'module-2-1-1',
+              children: [
+                {
+                  label: 'Submodule 2.1.1.1',
+                  value: 'submodule-2-1-1-1',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Course 2.2',
+          value: 'course-2-2',
+          children: [
+            {
+              label: 'Module 2.2.1',
+              value: 'module-2-2-1',
+              children: [
+                {
+                  label: 'Submodule 2.2.1.1',
+                  value: 'submodule-2-2-1-1',
+                },
+              ],
+            },
+            {
+              label: 'Module 2.2.2',
+              value: 'module-2-2-2',
+              children: [
+                {
+                  label: 'Submodule 2.2.2.1',
+                  value: 'submodule-2-2-2-1',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  const handleChange = (currentNode, selectedNodes) => {
+    setSelected(selectedNodes);
+
+    // Show alert with the label of the selected node
+    if (currentNode && currentNode.label) {
+      alert(`Selected: ${currentNode.label}`);
+    }
+
+    console.log('Selected Nodes:', selectedNodes);
+  };
   const handleEditorChange = (newContent) => {
     setContent(newContent);
   };
 
-  const handleButtonClick = () => {
-    if (editorRef.current) {
-      const editorInstance = editorRef.current;
-      const currentContent = editorInstance.value;
-      setContent(currentContent);
-    }
-  };
+  // const handleButtonClick = () => {
+  //   if (editorRef.current) {
+  //     const editorInstance = editorRef.current;
+  //     const currentContent = editorInstance.value;
+  //     setContent(currentContent);
+  //   }
+  // };
 
   const handleQuestionTypeChange = (event) => {
     setQuestionType(event.target.value);
@@ -84,10 +200,19 @@ const Question = () => {
   };
 
   return (
-    <div className="container-fluid bgpurplecard py-5">
-      <div className="question-type-dropdown d-flex justify-content-around" style={{ marginBottom: '10px' }}>
-        <div>
-          <label htmlFor="questionType">Select Question Type:</label>
+    <div className="container-fluid">
+      <h3 className='text-center'>Quiz</h3>
+      <div className='bgpurplecard p-5 rounded-3'>
+      <h5>Select the module</h5>
+      <DropdownTreeSelect
+        data={data}
+        onChange={handleChange}
+        className="bootstrap-demo"
+        texts={{ placeholder: "Select..." }}
+      />
+      <div className="question-type-dropdown d-flex justify-content-between my-3" style={{ marginBottom: '10px' }}>
+        <div className='mx-2'>
+          <label htmlFor="questionType"><b>Select Question Type:</b></label>
           <select
             id="questionType"
             value={questionType}
@@ -98,13 +223,30 @@ const Question = () => {
             <option value="true/false">True/False</option>
           </select>
         </div>
-        <div>
-          <input
-            type="file"
-            accept=".xlsx, .xls"
-            onChange={handleFileUpload}
-            style={{ marginRight: '10px' }}
-          />
+        <div className='mx-2'>
+
+        <div style={{ display: 'flex', alignItems: 'center' }} className='border border-2'>
+      <label
+        htmlFor="file-upload"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          cursor: 'pointer',
+          marginRight: '10px',
+        }}
+      >
+        <FaUpload  className='iconclr'/>
+        <input
+          id="file-upload"
+          type="file"
+          accept=".xlsx, .xls"
+          onChange={handleFileUpload}
+          style={{ display: 'none' }}
+        />
+        <span className='fw-bold'>Upload File</span>
+      
+      </label>
+    </div>
         </div>
       </div>
 
@@ -159,7 +301,7 @@ const Question = () => {
                 style={{ marginLeft: '10px' }}
               />
               <button
-                className='m-3 feedbackbtn rounded-2'
+                className='m-3 feedbackbtn rounded-2 '
                 onClick={() => toggleFeedback(index)}>
                 Add Feedback
               </button>
@@ -226,18 +368,18 @@ const Question = () => {
               </button>
             </div>
           ))}
-          <button type="button" onClick={addKeyword} style={{ marginTop: '10px' }}>
+          <button type="button" onClick={addKeyword} style={{ marginTop: '10px' }} >
             Add Keyword
           </button>
         </div>
       )}
 
-      <div style={{ marginTop: '20px', textAlign: 'right' }}>
+      {/* <div style={{ marginTop: '20px', textAlign: 'right' }}>
         <button onClick={handleButtonClick}>Show Content</button>
-      </div>
+      </div> */}
 
       <div style={{ marginTop: '20px' }}>
-        <button type="submit" style={{ marginLeft: '10px' }}>
+        <button type="submit" style={{ marginLeft: '10px' }} className='rounded-2'>
           Submit
         </button>
       </div>
@@ -262,6 +404,7 @@ const Question = () => {
           </ul>
         </div>
       )}
+    </div>
     </div>
   );
 };

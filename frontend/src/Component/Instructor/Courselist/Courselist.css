@@ -1,3 +1,7 @@
 .bgfullpath{
     height: 100vh;    
 }
+
+option{
+    border: none !important;
+}

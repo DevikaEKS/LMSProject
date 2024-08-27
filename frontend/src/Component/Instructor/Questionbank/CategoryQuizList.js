@@ -1,3 +1,6 @@
+
+
+
 // import React, { useState, useEffect } from 'react';
 // import quizData from './quizData.json'; 
 // import "./CategoryQuizList.css";
@@ -10,6 +13,8 @@
 //   const [addedQuizzes, setAddedQuizzes] = useState([]);
 //   const [marks, setMarks] = useState({});
 //   const [headerMarks, setHeaderMarks] = useState('');
+//   const [maxRandomValue, setMaxRandomValue] = useState('');
+//   const [viewType, setViewType] = useState('Sequential');
 
 //   useEffect(() => {
 //     const uniqueCategories = Array.from(new Set(quizData.map(item => item.Category)));
@@ -35,7 +40,7 @@
 //         updated[quizId] = true;
 //         setMarks(prevMarks => ({
 //           ...prevMarks,
-//           [quizId]: headerMarks
+//           [quizId]: headerMarks // Set headerMarks for new selection
 //         }));
 //       }
 //       return updated;
@@ -74,15 +79,32 @@
 //     setMarks({});
 //   };
 
+//   const handleMaxRandomValueChange = (event) => {
+//     const value = Number(event.target.value);
+//     const numberOfBoxes = Object.keys(selectedQuizzes).length;
+//     if (value >= 0 && value <= numberOfBoxes) {
+//       setMaxRandomValue(value);
+//     } 
+//     // else {
+//     //   alert('Value must be between 0 and the number of selected quizzes.');
+//     // }
+//   };
+
+//   const handleViewTypeChange = (type) => {
+//     setViewType(type);
+//     if (type === 'Random') {
+//       handleMaxRandomValueChange({ target: { value: maxRandomValue } }); // Ensure value is valid
+//     }
+//   };
+
 //   const filteredQuizzes = quizzes.filter(quiz => quiz.Category === selectedCategory);
 
 //   return (
 //     <div className='container-fluid'>
-//       <div className='frmshadow m-4 p-2'>
-//         <h1>Quiz Management</h1>
-
+//       <h3 className='text-center my-2'>Question Bank</h3>
+//       <div className='bgpurplecard m-4 p-3 rounded-2'>
 //         <div style={{ marginBottom: '20px' }}>
-//           <h2>Categories</h2>
+//           <h5>Categories</h5>
 //           <select
 //             value={selectedCategory}
 //             onChange={handleCategoryChange}
@@ -99,7 +121,7 @@
 
 //         {selectedCategory && (
 //           <div style={{ marginTop: '20px' }}>
-//             <h2>Quizzes</h2>
+//             <h5>Quizzes</h5>
 //             <table className='table'>
 //               <thead>
 //                 <tr className='bghead'>
@@ -111,6 +133,7 @@
 //                     Marks
 //                     <input
 //                       type="number"
+//                       min="0"
 //                       placeholder="Set Mark"
 //                       value={headerMarks}
 //                       onChange={handleHeaderMarksChange}
@@ -135,6 +158,7 @@
 //                     <td>
 //                       <input
 //                         type="number"
+//                         min="0"
 //                         value={marks[quiz['Quiz ID']] || ''}
 //                         onChange={(e) => handleMarksChange(quiz['Quiz ID'], e.target.value)}
 //                         disabled={!selectedQuizzes[quiz['Quiz ID']]}
@@ -145,27 +169,54 @@
 //               </tbody>
 //             </table>
 
-// {/* sequential flow */}
-// <div>
-// <label>Set Time</label>
-// <input type='number'/><br/>
-// <h4>Question View Type</h4>
-// <input type='radio' className='me-3 ms-1'/>
-// <label>Sequential</label>
-// <input type='radio' className='mx-3'/>
-// <label>Random</label>
-// </div>
+//             <div className='my-2'>
+//               <label>Set Time</label>
+//               <input type='number' min="0"/><br/>
+//               <h5 className='my-2'>Question View Type</h5>
+//               <input 
+//                 type='radio' 
+//                 name='viewType'
+//                 className='me-3 ms-1'
+//                 checked={viewType === 'Sequential'}
+//                 onChange={() => handleViewTypeChange('Sequential')}
+//               />
+//               <label className="custom-radio">Sequential</label>
+//               <input 
+//                 type='radio' 
+//                 name='viewType'
+//                 className='mx-3'
+//                 checked={viewType === 'Random'}
+//                 onChange={() => handleViewTypeChange('Random')}
+//               />
+//               <label>Random</label>
+//             </div>
 
-// {/* //end of sequence */}
+//             {viewType === 'Random' && (
+//               <div>
+//                 <label>Max Number of Random Inputs</label>
+//                 <input
+//                   type="number"
+//                   min="0"
+//                   value={maxRandomValue}
+//                   onChange={handleMaxRandomValueChange}
+//                 />
+//                 {/* {Array.from({ length: Number(maxRandomValue) }, (_, index) => (
+//                   <div key={index}>
+//                     <label>Input {index}</label>
+//                     <input type="number" min="0" />
+//                   </div>
+//                 ))} */}
+//               </div> 
+//             )}
 
-//             <button onClick={handleAddQuizzes} style={{ marginTop: '20px' }}>
+//             <button onClick={handleAddQuizzes} style={{ marginTop: '20px' }} className='rounded-3'>
 //               Add Selected Quizzes
 //             </button>
 //           </div>
 //         )}
 
 //         <div style={{ marginTop: '20px' }}>
-//           <h2>Added Quizzes</h2>
+//           <h5>Added Quizzes</h5>
 //           <ol>
 //             {addedQuizzes.map((quiz, index) => (
 //               <li key={index} style={{ marginBottom: '10px' }}>
@@ -194,7 +245,7 @@
 
 
 import React, { useState, useEffect } from 'react';
-import quizData from './quizData.json'; 
+import quizData from './quizData.json';
 import "./CategoryQuizList.css";
 
 const CategoryQuizList = () => {
@@ -276,10 +327,7 @@ const CategoryQuizList = () => {
     const numberOfBoxes = Object.keys(selectedQuizzes).length;
     if (value >= 0 && value <= numberOfBoxes) {
       setMaxRandomValue(value);
-    } 
-    // else {
-    //   alert('Value must be between 0 and the number of selected quizzes.');
-    // }
+    }
   };
 
   const handleViewTypeChange = (type) => {
@@ -293,7 +341,8 @@ const CategoryQuizList = () => {
 
   return (
     <div className='container-fluid'>
-      <div className='frmshadow m-4 p-2'>
+      <h3 className='text-center my-2'>Question Bank</h3>
+      <div className='bgpurplecard m-4 p-3 rounded-2'>
         <div style={{ marginBottom: '20px' }}>
           <h5>Categories</h5>
           <select
@@ -312,7 +361,7 @@ const CategoryQuizList = () => {
 
         {selectedCategory && (
           <div style={{ marginTop: '20px' }}>
-            <h2>Quizzes</h2>
+            <h5>Quizzes</h5>
             <table className='table'>
               <thead>
                 <tr className='bghead'>
@@ -360,26 +409,29 @@ const CategoryQuizList = () => {
               </tbody>
             </table>
 
-            <div>
-              <label>Set Time</label>
-              <input type='number' min="0"/><br/>
-              <h4>Question View Type</h4>
-              <input 
-                type='radio' 
-                name='viewType'
-                className='me-3 ms-1'
-                checked={viewType === 'Sequential'}
-                onChange={() => handleViewTypeChange('Sequential')}
-              />
-              <label>Sequential</label>
-              <input 
-                type='radio' 
-                name='viewType'
-                className='mx-3'
-                checked={viewType === 'Random'}
-                onChange={() => handleViewTypeChange('Random')}
-              />
-              <label>Random</label>
+            <div className='m-2'>
+              <label className='m-2'>Set Time</label>
+              
+              <input type='number' min="0" className='border-0'/><br/>
+              <h5 className='my-2'>Question View Type</h5>
+              <label className="custom-radio mx-2">
+                <input 
+                  type='radio' 
+                  name='viewType'
+                  checked={viewType === 'Sequential'}
+                  onChange={() => handleViewTypeChange('Sequential')}
+                />
+                Sequential
+              </label>
+              <label className="custom-radio mx-2">
+                <input 
+                  type='radio' 
+                  name='viewType'
+                  checked={viewType === 'Random'}
+                  onChange={() => handleViewTypeChange('Random')}
+                />
+                Random
+              </label>
             </div>
 
             {viewType === 'Random' && (
@@ -391,24 +443,18 @@ const CategoryQuizList = () => {
                   value={maxRandomValue}
                   onChange={handleMaxRandomValueChange}
                 />
-                {/* {Array.from({ length: Number(maxRandomValue) }, (_, index) => (
-                  <div key={index}>
-                    <label>Input {index}</label>
-                    <input type="number" min="0" />
-                  </div>
-                ))} */}
               </div> 
             )}
 
-            <button onClick={handleAddQuizzes} style={{ marginTop: '20px' }}>
+            <button onClick={handleAddQuizzes} style={{ marginTop: '20px' }} className='rounded-3'>
               Add Selected Quizzes
             </button>
           </div>
         )}
 
         <div style={{ marginTop: '20px' }}>
-          <h5>Added Quizzes</h5>
-          <ol>
+          {/* <h5>Added Quizzes</h5>                                               */}
+          {/* <ol>
             {addedQuizzes.map((quiz, index) => (
               <li key={index} style={{ marginBottom: '10px' }}>
                 <div><strong>Question:</strong> {quiz.Question}</div>
@@ -425,7 +471,7 @@ const CategoryQuizList = () => {
                 <div><strong>Correct Option:</strong> {quiz['Correct Option']}</div>
               </li>
             ))}
-          </ol>
+          </ol> */}
         </div>
       </div>
     </div>
@@ -433,4 +479,3 @@ const CategoryQuizList = () => {
 };
 
 export default CategoryQuizList;
-

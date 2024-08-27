@@ -9,7 +9,7 @@ import coursecontent3 from "../../../Asset/coursecontent3.jpg";
 function Courselist() {
   return (
     <div className="container-fluid bgfullpath mb-5">
-      <div className="container card mt-3">
+      <div className="container card mt-3 bgpurplecard border-0">
         <h3 className="text-start p-4">Course Overview</h3>
         <hr/>
         <div className="row mb-3 ">
@@ -33,7 +33,7 @@ function Courselist() {
               <div className="card-body">
                 <h5 className="card-title">Frontend</h5>
                 <p className="card-text">Brief description of the course.</p>
-                <Link to="/instructordashboard/coursemodule" className="btn btn-primary">Add Course Content</Link>
+                <Link to="/instructordashboard/coursemodule" className="btn btn-dark">Add Content</Link>
               </div>
             </div>
           </div>
@@ -43,7 +43,7 @@ function Courselist() {
               <div className="card-body">
                 <h5 className="card-title">HTML</h5>
                 <p className="card-text">Brief description of the course.</p>
-                <Link to="/instructordashboard/coursemodule" className="btn btn-primary">Add Course Content</Link>
+                <Link to="/instructordashboard/coursemodule" className="btn btn-dark">Add Content</Link>
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@ function Courselist() {
               <div className="card-body">
                 <h5 className="card-title">React</h5>
                 <p className="card-text">Brief description of the course.</p>
-                <Link to="/instructordashboard/coursemodule" className="btn btn-primary">Add Course Content</Link>
+                <Link to="/instructordashboard/coursemodule" className="btn btn-dark">Add Content</Link>
               </div>
             </div>
           </div>    

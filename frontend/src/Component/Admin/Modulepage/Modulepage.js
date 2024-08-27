@@ -94,7 +94,7 @@ function Modulepage() {
 
   return (
     <div className="container-fluid">
-      <div className="purplecards rounded-2 p-3">
+      <div className="purplecards rounded-2 p-3 my-5">
       <h3 className="violettext">Welcome to Course Module</h3>
       <h6>Select the Course</h6>
       <DropdownTreeSelect

@@ -1,0 +1,22 @@
+
+.aboutDr{
+text-align: justify;
+}
+.dcurve{
+    border-top-right-radius: 95px;
+}
+
+.overviewcontent{
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.abtdr{
+    font-weight: 500 !important;
+}
+
+@media (max-width:426px){
+    .drimg{
+        max-height: 350px;
+        max-width: 350px;
+    }
+}

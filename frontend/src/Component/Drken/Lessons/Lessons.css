@@ -1,0 +1,17 @@
+.lessoncard{
+    background-color: #3C0B56;
+    color: white;
+    text-align: left !important;
+}
+
+.lesson{
+    max-height: 200px;
+}
+
+@media (max-width:425px){
+    .lesson{
+        max-height: 150px;
+    } 
+}
+/* ///blur */
+/* Styles for the blurred background */

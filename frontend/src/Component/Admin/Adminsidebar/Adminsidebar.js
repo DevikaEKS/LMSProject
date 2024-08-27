@@ -59,14 +59,12 @@
 
 // export default Adminsidebar;
 
-
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import './Adminsidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faBars, faFile, faPowerOff, faFileLines, faLayerGroup} from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { faHome, faUser, faBars, faFile, faPowerOff, faFileLines, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { Link, useParams } from 'react-router-dom';
 
 const sidebarVariants = {
   open: { width: '200px' },
@@ -78,12 +76,14 @@ const linkVariants = {
   closed: { opacity: 0, display: 'none' },
 };
 
-function Adminsidebar() {
-  const [isOpen, setIsOpen] = React.useState(false);
+function Adminsidebar({ isOpen, toggleSidebar }) {
+  // const [isOpen, setIsOpen] = React.useState(false);
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+  const { id } = useParams()
+  // console.log("adminside", id);
+  // const toggleSidebar = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   return (
     <motion.div
@@ -96,38 +96,38 @@ function Adminsidebar() {
       </div>
       <ul>
         <li>
-          <Link to="/admindashboard/coursedetail" className='disabled-link'>
-            <FontAwesomeIcon icon={faHome} className='mx-1 text-light '/>
+          <Link to={`/admindashboard/${id}/coursedetail`} >
+            <FontAwesomeIcon icon={faHome} className='mx-1 text-light ' />
             <motion.span variants={linkVariants} className='text-white text-decoration-none '>Home</motion.span>
           </Link>
         </li>
         <li>
-          <Link to="/admindashboard/admincredential">
-            <FontAwesomeIcon icon={faUser} className='mx-1 text-light'/>
+          <Link to={`/admindashboard/${id}/admincredential`}>
+            <FontAwesomeIcon icon={faUser} className='mx-1 text-light' />
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>User Registration</motion.span>
           </Link>
-        </li>      
+        </li>
         <li>
-          <Link to="/admindashboard/category">
-            <FontAwesomeIcon icon={faLayerGroup} className='mx-1 text-light'/>
+          <Link to={`/admindashboard/${id}/category`}>
+            <FontAwesomeIcon icon={faLayerGroup} className='mx-1 text-light' />
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Add Category</motion.span>
           </Link>
         </li>
         <li>
-          <Link to="/admindashboard/coursedetail">
-            <FontAwesomeIcon icon={faFileLines} className='mx-1 text-light'/>
+          <Link to={`/admindashboard/${id}/coursedetail`}>
+            <FontAwesomeIcon icon={faFileLines} className='mx-1 text-light' />
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Courses</motion.span>
           </Link>
         </li>
         <li>
-          <Link to="/admindashboard/courseupdate">
-            <FontAwesomeIcon icon={faFile} className='mx-1 text-light'/>
+          <Link to={`/admindashboard/${id}/courseupdate`}>
+            <FontAwesomeIcon icon={faFile} className='mx-1 text-light' />
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Add Courses</motion.span>
           </Link>
         </li>
         <li>
           <Link to="/">
-            <FontAwesomeIcon icon={faPowerOff} className='mx-1 text-light'/>
+            <FontAwesomeIcon icon={faPowerOff} className='mx-1 text-light' />
             <motion.span variants={linkVariants} className='text-white text-decoration-none ms-1'>Logout</motion.span>
           </Link>
         </li>

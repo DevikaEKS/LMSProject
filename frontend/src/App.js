@@ -38,6 +38,10 @@ import Question from './Component/Instructor/Question/Question';
 import DisplayContent from "./Component/Admin/Coursecontent/DisplayContent";
 import CategoryQuizList from "./Component/Instructor/Questionbank/CategoryQuizList";
 import Courselist from "./Component/Instructor/Courselist/Courselist";
+import Drkenhome from "./Component/Drken/Drkenhomepage/Drkenhome";
+import Courseview from "./Component/Drken/Courseview/Courseview";
+import Drkendashboard from "./Component/Drken/Drkendashboard/Drkendashboard";
+import Drmenubar from "./Component/Drken/Drmenubar/Drmenubar";
 // import RichTextEditor from './Component/Instructor/Richtexteditor/Richtexteditor';
 
 
@@ -73,19 +77,19 @@ function App() {
             <Route path="approved" element={<Approvedattendance />} />
           </Route>
 
-          <Route path="/admindashboard/*" element={<Admindashboard />}>
+          <Route path="/admindashboard/:id*" element={<Admindashboard />}>
             <Route path="coursedetail" element={<CourseDetail />} />
             <Route path="courseupdate" element={<Courseupdation />} />
             <Route path="admincredential" element={<AdminCredential />} />
             <Route path="category" element={<Categorycreation />} />
           </Route>
 
-          <Route path="/instructordashboard/*" element={<Dashboardinstructor />} >
+          <Route path="/instructordashboard/:id*" element={<Dashboardinstructor />} >
             <Route path="courselist" element={<Courselist/>} />
             <Route path="coursecontent" element={<Coursecontent />} />
             <Route path="displaycontent" element={<DisplayContent />} />
             <Route path="coursemodule" element={<Modulepage />} />
-            <Route path="quilltxt" element={[<CategoryDropdown />, <Question />]} />
+            <Route path="quilltxt" element={ <Question />} />
             <Route path="questionbank" element={<CategoryQuizList />} />
           </Route>
           <Route path='/instructorsidebar' element={<Sidebarinstructor />} />
@@ -93,7 +97,12 @@ function App() {
           <Route path='/dropdowncategory' element={<CategoryDropdown />} />
           <Route path='/editor' element={<EditorComponent />} />
           <Route path='/questioncreation' element={<Question />} />
+{/* //DrKen */}
+<Route path="/Drhome" element={[<Drmenubar/>,<Drkenhome/>]}/>
+<Route path="/courseview" element={<Courseview/>}/>
+<Route path="/dr" element={<Drkendashboard/>}> 
 
+</Route>
         </Routes>
       </BrowserRouter>
     </div>

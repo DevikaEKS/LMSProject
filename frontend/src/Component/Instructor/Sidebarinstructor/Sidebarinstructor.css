@@ -54,6 +54,10 @@
   }
   
   a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit text color from parent */
+    text-decoration: none; 
+    color: inherit;
+    color: white; 
   }
+
+
+  
