@@ -39,6 +39,7 @@ import Coursepages from "./Component/Admin/Coursecontent/Coursepages";
 import AdminCredential from "./Component/Admin/Admincredential/Admincredential";
 import Categorycreation from "./Component/Admin/Categorycreation/Categorycreation";
 import DisplayContent from "./Component/Admin/Coursecontent/DisplayContent";
+import Question from "./Component/Instructor/Question/Question";
 
 function App() {
   return (
@@ -118,7 +119,7 @@ function App() {
             <Route path="displaycontent" element={<DisplayContent />} />
             <Route path="coursesubmodule" element={<Courseobjective />} />
             <Route path="coursemodule" element={<Modulepage />} />
-            <Route path="quilltxt" element={<Quilltxt />} />
+            <Route path="quilltxt" element={<Question />} />
             <Route path="pages" element={<Coursepages />} />
           </Route>
 

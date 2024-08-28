@@ -5,7 +5,8 @@ import db from "./config/email.config.mjs";
 import dotenv from "dotenv";
 import authRoute from "./routes/auth.routes.mjs";
 import categoryRoute from "./routes/Course/category.routes.mjs";
-import courseRoute from './routes/Course/course.routes.mjs'
+import courseRoute from "./routes/Course/course.routes.mjs";
+import quizRouter from "./routes/Course/quiz.routes.mjs";
 
 dotenv.config();
 const app = express();
@@ -22,7 +23,8 @@ app.use(
 );
 app.use("/auth", authRoute);
 app.use("/category", categoryRoute);
-app.use('/course',courseRoute);
+app.use("/course", courseRoute);
+app.use("/quiz", quizRouter);
 app.use("/uploads", express.static("uploads"));
 //richtext
 
