@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+.lessontext{
+    color: #510058;
+    background-color: #f6f6f6;
+}
+
+.active-link {
+    font-weight: 800 !important;
+    color: #510058 !important;
+    background-color: #E2B6F6;
+    border-radius: 3px 3px 0px 0px;
+    padding: 5px;
+  }
+  
+  .content-area {
+    margin-top: 20px;
+  }
+
+.entiretext{
+  font-family: 'Montserrat', sans-serif !important;
+}

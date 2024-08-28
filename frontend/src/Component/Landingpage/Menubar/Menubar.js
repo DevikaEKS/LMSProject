@@ -53,14 +53,15 @@ function Menubar() {
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/activecourse">MyCourses</Nav.Link>
+            <Nav.Link as={Link} to="/activecourse" >MyCourses</Nav.Link>
        
             <Nav.Item>
-            <div className='box mt-1'>
+            <div className='box mt-1 mx-2'>
              <input type='text' placeholder='Search...' />
            <a href='#' />
             <FontAwesomeIcon icon={faSearch} className="search-icon text-dark iconsearch" />
            </div>
+ 
  
               {/* <div className="input-group">
                 <input type="text" className="form-control" placeholder="Search..." />
@@ -72,12 +73,12 @@ function Menubar() {
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/login">Login</Nav.Link>
-            <Nav.Item>
+            {/* <Nav.Item>
               <Nav.Link as={Link} to="/contact" className='iconviews'>Notification</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link as={Link} to="/contact" className='iconviews'>Profile</Nav.Link>
-            </Nav.Item>
+            </Nav.Item> */}
             
           </Nav>
         </Navbar.Collapse>

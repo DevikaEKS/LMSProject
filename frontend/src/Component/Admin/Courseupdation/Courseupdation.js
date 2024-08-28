@@ -132,8 +132,10 @@ function Courseupdation() {
   return (
     <div className="container-fluid p-0">
       <ToastContainer />
-      <div className="frmbg p-3 h-100">
-        <form className="bg-light p-3 rounded-2" onSubmit={handleSubmit}>
+      <h3 className="text-center mt-2">Course Creation</h3>
+      <div className="frmbg p-5 h-100 my-5 rounded-3">
+        <form className="bg-light rounded-2 p-3" onSubmit={handleSubmit}>
+        
           <div className="form-group">
             <div className="form-group-inner">
               <label htmlFor="courseFullName">Course Full Name</label>
@@ -177,7 +179,7 @@ function Courseupdation() {
                 </select>
                 <button
                   type="button"
-                  className="btn btn-dark mt-2"
+                  className="btn btn-dark mx-2"
                   onClick={() => handleOpenModal(index)}
                 >
                   +
@@ -231,7 +233,7 @@ function Courseupdation() {
               ></textarea>
             </div>
           </div>
-          <input type="submit" className="frmbutton" />
+          <input type="submit" className="frmbutton rounded-1 p-2" />
         </form>
       </div>
 

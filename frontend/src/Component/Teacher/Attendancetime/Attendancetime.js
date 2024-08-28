@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Attendancetime.css";
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 
 function Attendancetime() {
   const [checked, setChecked] = React.useState(true);
@@ -51,7 +51,7 @@ function Attendancetime() {
             <div className='d-flex justify-content-between'>
             <p className='text-light'>9:00 -10:00</p>
             <p className='text-light'>S M T W T F S </p>
-            <Switch checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }}/>
+            {/* <Switch checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }}/> */}
             </div>
           </div>
 
@@ -59,7 +59,7 @@ function Attendancetime() {
             <div className='d-flex justify-content-between'>
             <p className='text-light'>9:00 -10:00</p>
             <p className=' text-light'>S M T W T F S </p>
-            <Switch checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }}/>
+            {/* <Switch checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }}/> */}
             </div>
           </div>
 
@@ -67,7 +67,7 @@ function Attendancetime() {
             <div className='d-flex justify-content-between'>
             <p className='text-light'>9:00 -10:00</p>
             <p className=' text-light'>S M T W T F S </p>
-            <Switch color='dark' checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }}/>
+            {/* <Switch color='dark' checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }}/> */}
             </div>
           </div>
        

@@ -2,9 +2,14 @@
   background-color: blueviolet;
 }
 .modulepart{
+<<<<<<< HEAD
   background-color: blueviolet; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   background-color: rgb(209, 180, 235);
+=======
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgb(209, 180, 235);
+>>>>>>> 5961dbfd80e155634386d2bca3ef4ffce4b0e74d
 }
 
 .violettext{
@@ -13,10 +18,15 @@
 .brd{
 border: 1px solid #841ECC;
 }
+<<<<<<< HEAD
 .submodulebox{
 background-color: #EDD7FC;
 }
 
+=======
+
+  
+>>>>>>> 5961dbfd80e155634386d2bca3ef4ffce4b0e74d
 .addbutton {
   padding: 10px 20px;
   display: flex;
@@ -29,7 +39,18 @@ background-color: #EDD7FC;
 }
 
 .submitbutton1{
+<<<<<<< HEAD
   background-color: #841ECC;
   color: #fff;
   text-decoration: none;
 }
+=======
+    background-color: #841ECC;
+    color: #fff;
+    text-decoration: none;
+  }
+
+.purplecards{
+  background-color: rgb(209, 180, 235);
+}
+>>>>>>> 5961dbfd80e155634386d2bca3ef4ffce4b0e74d

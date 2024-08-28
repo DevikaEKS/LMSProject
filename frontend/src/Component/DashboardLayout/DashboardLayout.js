@@ -23,7 +23,7 @@
 import React from 'react';
 
 import { Outlet } from 'react-router-dom';
-import './DashboardLayout.css'; // Assuming you have some styles for layout
+import './DashboardLayout.css'; 
 import Sidebarcomp from '../sidebarcomp/sidebarcomp';
 
 const DashboardLayout = () => {

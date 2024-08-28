@@ -7,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function RegisterPage() {
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     phno: "",
@@ -37,8 +37,8 @@ function RegisterPage() {
     if (!formData.email || !emailRegex.test(formData.email)) {
       tempErrors.email = "Invalid email format.";
     }
-    if (!formData.password || formData.password.length < 6) {
-      tempErrors.password = "Password must be at least 6 characters long.";
+    if (!formData.password || formData.password.length < 8) {
+      tempErrors.password = "Password must be at least 8 characters long.";
     }
     if (formData.password !== formData.password2) {
       tempErrors.password2 = "Passwords do not match.";
@@ -46,6 +46,10 @@ function RegisterPage() {
 
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
+  };
+
+  const handleLoginClick = () => {
+    navigate("/login"); // Ensure '/login' is the correct path for your login page
   };
 
   const handleSubmit = (e) => {
@@ -62,7 +66,7 @@ function RegisterPage() {
         .then((res) => {
           if (res.data.message === "User registered successfully.") {
             toast.success("Registration Success");
-            // nav("/login");
+            navigate("/login"); // Redirect to login page after successful registration
           } else if (res.data.message === "All fields are required.") {
             toast.error("All fields are required.");
           } else if (
@@ -174,6 +178,9 @@ function RegisterPage() {
               </button>
             </div>
           </form>
+          <p>Already have an account? <span className="register-link fw-bold" onClick={handleLoginClick}>
+            Login
+          </span></p>
         </div>
         <div className="login-image">
           <img src={regim} alt="register" />

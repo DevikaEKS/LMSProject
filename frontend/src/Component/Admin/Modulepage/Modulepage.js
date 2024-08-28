@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useState } from "react";
 // import DropdownTreeSelect from 'react-dropdown-tree-select';
 // import 'react-dropdown-tree-select/dist/styles.css';
@@ -233,6 +234,12 @@
 import React, { useState, useEffect } from "react";
 import DropdownTreeSelect from "react-dropdown-tree-select";
 import "react-dropdown-tree-select/dist/styles.css";
+=======
+
+import React, { useState, useEffect } from "react";
+import DropdownTreeSelect from 'react-dropdown-tree-select';
+import 'react-dropdown-tree-select/dist/styles.css';
+>>>>>>> 5961dbfd80e155634386d2bca3ef4ffce4b0e74d
 import axios from "axios";
 import "./Modulepage.css";
 import { toast, ToastContainer } from "react-toastify";
@@ -241,6 +248,7 @@ import "react-toastify/dist/ReactToastify.css";
 function Modulepage() {
   const [textareas, setTextareas] = useState([""]);
   const [selected, setSelected] = useState([]);
+<<<<<<< HEAD
   const [courses, setCourses] = useState([]);
   const [selectedNode, setSelectedNode] = useState(null);
   const [path, setPath] = useState("");
@@ -256,6 +264,20 @@ function Modulepage() {
       .then((res) => {
         setCourses(res.data);
         setModuleStructure(buildModuleStructure(res.data));
+=======
+  const [courses, setCourses] = useState([]); 
+
+  useEffect(() => {
+    // Fetch the courses when the component mounts
+    axios.get("http://localhost:5000/course/getcourse")
+      .then((res) => {
+        console.log(res.data);
+        if (res.data && res.data.result) {
+          setCourses(res.data.result); 
+        } else {
+          toast.error("Unexpected response format.");
+        }
+>>>>>>> 5961dbfd80e155634386d2bca3ef4ffce4b0e74d
       })
       .catch((error) => {
         toast.error("Failed to fetch courses!");
@@ -263,6 +285,7 @@ function Modulepage() {
       });
   }, []);
 
+<<<<<<< HEAD
   const buildModuleStructure = (nodes) => {
     const structure = {};
 
@@ -373,6 +396,31 @@ function Modulepage() {
 
       setSelectedModuleId(currentNode.value || "");
     }
+=======
+  // Transform course data for DropdownTreeSelect
+  const formatData = (courses) => {
+    if (!courses || !Array.isArray(courses)) {
+      return []; // Return an empty array if courses is not defined or not an array
+    }
+
+    return courses.map(course => ({
+      label: course.coursename, // Assuming course object has a 'name' property
+      value: course.id,   // Assuming course object has an 'id' property
+      children: course.modules ? course.modules.map(module => ({
+        label: module.name, // Assuming module object has a 'name' property
+        value: module.id,   // Assuming module object has an 'id' property
+        children: module.submodules ? module.submodules.map(submodule => ({
+          label: submodule.name, // Assuming submodule object has a 'name' property
+          value: submodule.id,   // Assuming submodule object has an 'id' property
+        })) : [],
+      })) : [],
+    }));
+  };
+
+  const handleChange = (currentNode, selectedNodes) => {
+    setSelected(selectedNodes);
+    console.log('Selected Nodes:', selectedNodes);
+>>>>>>> 5961dbfd80e155634386d2bca3ef4ffce4b0e74d
   };
 
   const addTextarea = () => {
@@ -398,6 +446,7 @@ function Modulepage() {
       return;
     }
 
+<<<<<<< HEAD
     const pathParts = path.split("/");
     const cleanedPath = pathParts.slice(1).join("/") || "1";
 
@@ -453,6 +502,37 @@ function Modulepage() {
         texts={{ placeholder: "Select..." }}
         value={selectedNode ? [selectedNode] : []}
       />
+=======
+    axios.post("http://localhost:5000/course/addmodule", {
+      moduleNames,
+    })
+    .then((res) => {
+      console.log(res);
+      if (res.data.message === "moduleNames is mandatory and should be an array") {
+        toast.error("moduleNames is mandatory and should be an array");
+      } else if (res.data.message === "modules added successfully") {
+        toast.success("modules added successfully");
+        setTextareas([""]); // Clear textareas after successful submission
+      } else if (res.data.message === "db_error") {
+        toast.error("db_error");
+      }
+    })
+    .catch((error) => {
+      toast.error("There was an error creating the modules!", error);
+    });
+  };
+
+  return (
+    <div className="container-fluid">
+      <div className="purplecards rounded-2 p-3 my-5">
+      <h3 className="violettext">Welcome to Course Module</h3>
+      <h6>Select the Course</h6>
+      <DropdownTreeSelect
+        data={formatData(courses)}
+        onChange={handleChange}
+        className="bootstrap-demo"
+        texts={{ placeholder: "Select..." }}/>
+>>>>>>> 5961dbfd80e155634386d2bca3ef4ffce4b0e74d
       <ToastContainer />
       <div className="row">
         <form onSubmit={handleSubmit}>
@@ -466,20 +546,19 @@ function Modulepage() {
                   onChange={(e) => handleTextareaChange(index, e.target.value)}
                   rows="2"
                   cols="40"
-                  required
-                />
+                  required />
                 {index === textareas.length - 1 && (
                   <button
                     type="button"
-                    className="addbutton"
-                    onClick={addTextarea}
-                  >
+                    className="addbutton rounded-2"
+                    onClick={addTextarea} >
                     +
                   </button>
                 )}
               </div>
             ))}
           </div>
+<<<<<<< HEAD
           <div className="my-3">
             <label htmlFor="fileUpload" className="violettext">
               Upload Image:
@@ -493,11 +572,16 @@ function Modulepage() {
           </div>
           <div className="d-flex justify-content-end mt-3">
             <button type="submit" className="addbutton rounded-pill">
+=======
+          <div className="d-flex justify-content-between">
+            <button type="submit" className="submitbutton rounded-3">
+>>>>>>> 5961dbfd80e155634386d2bca3ef4ffce4b0e74d
               Submit
             </button>
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 }
